@@ -1,173 +1,148 @@
-import React, { useState, memo } from "react";
-import { FaBars, FaTimes, FaGithub, FaLinkedin } from "react-icons/fa";
-import { BsFillPersonLinesFill } from "react-icons/bs";
-import Logo from "../assets/logo.png";
+import React, { useState, useEffect } from "react";
+import { Menu, X, Github, Linkedin } from "lucide-react";
 import { Link } from "react-scroll";
-import CV from "../assets/Yhonatan Peguero-CV.pdf";
-
-// Memoizar componentes que no cambian frecuentemente
-const NavLink = memo(({ to, children }) => (
-  <Link
-    to={to}
-    smooth={true}
-    duration={500}
-    offset={-70}
-    spy={true}
-    activeClass="text-pink-600 shadow-[0_4px_0_rgb(219,39,119)]"
-    className="hover:text-gray-300 cursor-pointer px-4 py-2 transition-all duration-300 hover:shadow-[0_4px_0_rgb(156,163,175)]"
-  >
-    {children}
-  </Link>
-));
-
-// Memoizar íconos sociales
-const SocialIcon = memo(({ href, children }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noreferrer"
-    className="flex justify-between items-center w-full text-gray-300"
-  >
-    {children}
-  </a>
-));
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false);
-  const handleClick = () => setNav(!nav);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      // Force 'contact' active state when near bottom of page
+      const isBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+      if (isBottom) {
+        setActiveSection('contact');
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "Home", to: "home" },
+    { name: "About", to: "about" },
+    { name: "Skills", to: "skills" },
+    { name: "Projects", to: "projects" },
+  ];
+
   return (
-    <>
-      {/* Navbar principal */}
-      <div className="fixed w-full top-0 h-[80px] flex justify-between items-center px-4 bg-[#0a192f]/95 backdrop-blur-sm text-gray-300 shadow-lg z-50">
-        <div className="container mx-auto max-w-[1000px] flex items-center justify-between">
-          <Link to="home" smooth={true} duration={500}>
-            <img src={Logo} alt="Logo" style={{ width: "75px" }} />
-          </Link>
-          {/* Menu */}
-          {/* @media screen and min-width(768px) {display:flex} === md:flex */}
-          <div className="hidden md:flex">
-            <ul className="hidden md:flex">
-              <li>
-                <NavLink to="home" smooth={true} duration={500}>
-                  Inicio
-                </NavLink>
-              </li>
-              {/* <li>About</li> */}
-              <li>
-                <NavLink to="skills" smooth={true} duration={500}>
-                  Habilidades
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="work" smooth={true} duration={500}>
-                  Proyectos
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="contact" smooth={true} duration={500}>
-                  Contáctame
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-          {/* Hamburger */}
-          <div className="md:hidden z-10" onClick={handleClick}>
-            {!nav ? <FaBars /> : <FaTimes />}
-          </div>
-          {/* Mobile menu */}
-          {/* width:100% === w-full     height:100vh === h-screen */}
-          <ul
-            className={
-              !nav
-                ? "hidden"
-                : "absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center"
-            }
+    <nav
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled ? "glass py-4 border-b border-white/5" : "bg-transparent py-6"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        {/* Logo */}
+        <div className="text-2xl font-bold font-mono tracking-tighter text-white cursor-pointer relative group">
+          <Link 
+            to="home" 
+            smooth={true} 
+            duration={500}
+            onSetActive={() => setActiveSection('home')}
           >
-            <li className="py-6 text-4xl">
-              <NavLink onClick={handleClick} to="home" smooth={true} duration={500}>
-                Inicio
-              </NavLink>
-            </li>
-            {/* <li className="py-6 text-4xl">
-              {" "}
-              <Link onClick={handleClick} to="about" smooth={true} duration={500}>
-                About
-              </Link>
-            </li> */}
-            <li className="py-6 text-4xl">
-              {" "}
-              <NavLink
-                onClick={handleClick}
-                to="skills"
-                offset={-70}
-                smooth={true}
-                duration={500}
-              >
-                Habilidades
-              </NavLink>
-            </li>
-            <li className="py-6 text-4xl">
-              {" "}
-              <NavLink
-                onClick={handleClick}
-                offset={-70}
-                to="work"
-                smooth={true}
-                duration={500}
-              >
-                Proyectos
-              </NavLink>
-            </li>
-            <li className="py-6 text-4xl">
-              {" "}
-              <NavLink
-                onClick={handleClick}
-                offset={-70}
-                to="contact"
-                smooth={true}
-                duration={500}
-              >
-                Contáctame
-              </NavLink>
-            </li>
-          </ul>
+            YP<span className="text-primary">.</span>
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+          </Link>
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-2">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.to}
+              spy={true}
+              smooth={true}
+              duration={500}
+              offset={-70}
+              onSetActive={() => setActiveSection(link.to)}
+              className={`relative px-3 py-2 transition-all duration-300 cursor-pointer text-sm font-medium tracking-wide uppercase group
+                ${activeSection === link.to ? "text-white font-bold" : "text-text-muted hover:text-white"}`}
+            >
+              {link.name}
+              {/* Active Line (Always visible when active) */}
+              <span 
+                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[2px] bg-primary rounded-full transform transition-transform duration-500 ease-out origin-center
+                ${activeSection === link.to ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"}`}
+              ></span>
+             </Link>
+          ))}
+
+          {/* Contact CTA */}
+          <Link
+            to="contact"
+            spy={true}
+            smooth={true}
+            duration={500}
+            offset={-70}
+            onSetActive={() => setActiveSection('contact')}
+            className="ml-8 px-6 py-2 text-sm font-bold text-primary border border-primary/50 hover:bg-primary hover:text-bg-dark rounded-full transition-all duration-300 cursor-pointer shadow-[0_0_10px_rgba(0,242,254,0.1)] hover:shadow-[0_0_20px_rgba(0,242,254,0.4)] hover:scale-105 relative group overflow-hidden"
+          >
+            <span className="relative z-10">Let's Talk</span>
+            {/* Active Line inside button */}
+             <span 
+                className={`absolute bottom-1.5 left-1/2 -translate-x-1/2 w-[40%] h-[2px] bg-primary/0 rounded-full transform transition-all duration-500 ease-out origin-center
+                ${activeSection === 'contact' ? "!bg-primary scale-x-100" : "scale-x-0"}`}
+              ></span>
+          </Link>
+
+        </div>
+
+        {/* Mobile Toggle */}
+        <div className="md:hidden text-text-main cursor-pointer hover:text-primary transition-colors" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
         </div>
       </div>
 
-      {/* Social icons - MOVIDO FUERA DEL NAVBAR */}
-      <div className="hidden lg:flex fixed flex-col top-1/2 -translate-y-1/2 left-0 z-40">
-        <ul>
-          <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-blue-600">
-            {/* este li mide 128px y no 160px porque los li tienen un padding puesto en index.css y este despues de ese padding recién toma el width:100%  */}
-            <SocialIcon href="https://www.linkedin.com/in/yhonatan-peguero/">
-              LinkedIn
-              <FaLinkedin size={30} />
-            </SocialIcon>
-          </li>
-          <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#333]">
-            <SocialIcon href="https://github.com/YhonaPeguero">
-              Github
-              <FaGithub size={30} />
-            </SocialIcon>
-          </li>
-          {/* <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#6fc2b0]">
-                        <a
-                            href="/"
-                            className="flex justify-between items-center w-full text-gray-300"
-                        >
-                            Email
-                            <HiOutlineMail size={30} />
-                        </a>
-                    </li> */}
-          <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-[#565f69]">
-            <SocialIcon href={CV}>
-              CV
-              <BsFillPersonLinesFill size={30} />
-            </SocialIcon>
-          </li>
-        </ul>
-      </div>
-    </>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="absolute top-full left-0 w-full glass border-b border-white/10 md:hidden flex flex-col items-center py-8 space-y-6 overflow-hidden"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.to}
+                smooth={true}
+                duration={500}
+                offset={-70}
+                onClick={() => setIsOpen(false)}
+                className="text-text-main text-lg font-medium hover:text-primary transition-colors cursor-pointer"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Link
+                to="contact"
+                smooth={true}
+                duration={500}
+                offset={-70}
+                onClick={() => setIsOpen(false)}
+                className="text-primary font-bold border border-primary px-6 py-2 rounded-full hover:bg-primary hover:text-bg-dark transition-all"
+            >
+                Let's Talk
+            </Link>
+            
+             <div className="flex space-x-6 mt-4 pt-4 border-t border-white/10 w-1/2 justify-center">
+                <a href="https://github.com/YhonaPeguero" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-white">
+                    <Github size={24} />
+                </a>
+                <a href="https://linkedin.com/in/yhona-peguero" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-white">
+                    <Linkedin size={24} />
+                </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

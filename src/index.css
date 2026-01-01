@@ -2,29 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap");
+/* Import Google Fonts: Outfit (Headings) and Inter (Body) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;600;700;800&display=swap');
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    @apply font-[Raleway];
+    @apply bg-bg-dark text-text-main font-sans antialiased overflow-x-hidden;
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(112, 0, 223, 0.08), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(0, 242, 254, 0.08), transparent 25%);
   }
-  li {
-    @apply px-4;
-    @apply cursor-pointer;
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold text-text-highlight;
   }
 }
 
-.content-div {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 250px;
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-[12px] bg-bg-card border border-white/10 shadow-lg;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
 }
 
-.content-div:hover {
-  background-image: linear-gradient(
-    to right,
-    rgba(29, 78, 216, 0.8), /* Azul brillante */
-    rgba(102, 51, 153, 0.8) /* Morado oscuro */
-  ) !important;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

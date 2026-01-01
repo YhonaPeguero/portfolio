@@ -1,53 +1,52 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Mail } from "lucide-react";
 
 const Contact = () => {
-    return (
-        <div
-            name="contact"
-            /* le quito el h-screen y le paso de p-4 a p-8 */
-            className="w-full h-screen bg-[#0a192f] flex justify-center items-center p-8 mt-10"
-        >
-            
-            <form name="contactForm" method="POST" action="https://getform.io/f/4d8ea7cc-360e-4cf5-be8e-c08bae209aac"
-                className="flex flex-col max-w-[600px] w-full"
-            >
-               
-                <div className="pb-8">
-                    <p className="text-4xl font-bold inline border-b-4 border-pink-600 text-gray-300">
-                        Contáctame
-                    </p>
-                    <p className="text-gray-300 py-4">
-                    ¡Espero que podamos hablar pronto! enviame un mensaje para charlar sobre tu proyecto.
-                    </p>
-                </div>
+  return (
+    <section id="contact" className="py-32 relative overflow-hidden">
+      {/* Background gradients for depth, not boxed */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/20 blur-[120px] rounded-full mix-blend-screen opacity-20 pointer-events-none"></div>
 
-                <input 
-                type="hidden" 
-                name="form-name" 
-                value="contact" 
-                />
-                <input
-                    className="bg-[#ccd6f6] p-2"
-                    placeholder="Nombre"
-                />
-                <input
-                    className="my-4 p-2 bg-[#ccd6f6]"
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                />
-                <textarea
-                    className="bg-[#ccd6f6] p-2"
-                    name="message"
-                    rows="10"
-                    placeholder="Mensaje"
-                ></textarea>
-                <button type='submit' className="text-white border-2 hover:bg-pink-600 hover:border-pink-600 px-4 py-3 my-8 mx-auto flex items-center">
-                    Enviar Mensaje
-                </button>
-            </form>
-        </div>
-    );
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <motion.div
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.6 }}
+        >
+            {/* Section Header - Exact match to Projects.jsx */}
+            <div className="mb-16 text-left">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-2">
+                    <span className="text-primary">04.</span> What's Next?
+                </h2>
+                <div className="h-1 w-20 bg-primary rounded"></div>
+            </div>
+
+            <div className="max-w-3xl">
+                <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight leading-tight text-left">
+                    Let's Build <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">Something Incredible.</span>
+                </h2>
+
+                <p className="text-text-muted text-base md:text-lg max-w-2xl mb-10 leading-relaxed text-left">
+                    I'm currently open to new opportunities and collaborations. 
+                    Whether you have a game-changing idea or just want to discuss modern web tech, 
+                    my inbox is always open.
+                </p>
+
+                <div className="text-left">
+                    <a href="mailto:yhona.peguero@gmail.com" className="group inline-block">
+                        <button className="px-8 py-4 bg-white text-bg-dark font-bold text-base rounded-full hover:scale-105 transition-transform duration-300 flex items-center gap-3 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(0,242,254,0.4)]">
+                            <span>Say Hello</span>
+                            <Mail size={18} className="group-hover:rotate-12 transition-transform" />
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default Contact;
