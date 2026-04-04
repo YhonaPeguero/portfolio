@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Folder } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 
 // Import images
 import AnimeApp from "../assets/anime-app.png";
@@ -8,18 +8,19 @@ import TestApiPeliculas from "../assets/test-api.png";
 import PromoVisa from "../assets/promo-visa-sin-limites.jpg";
 import LeoPrint from "../assets/leoprint.jpg";
 import VocationalLanding from "../assets/VocationalLanding.jpg";
-import DigitalThrive from "../assets/digital-thrive.jpg";
+import ForeverPink from "../assets/forever-pink-cover.jpg";
 import TokenCalculator from "../assets/llmtokencalculator.jpg";
 
 const Projects = () => {
   const projects = [
     {
-      title: "LeoPrint Client Portal",
-      description: "A commercial landing page and portal for a printing business. Focused on accessibility and quick information retrieval.",
-      tech: ["React", "Vite", "TailwindCSS"],
+      title: "Forever Pink Beauty Lounge",
+      description: "Premium beauty lounge website for St. Thomas featuring service highlights, polished branding, and a mobile-friendly booking-focused experience.",
+      tech: ["React", "Vite", "Responsive UI"],
       github: null, // Private/Client
-      live: "https://leo-print.vercel.app/",
-      image: LeoPrint,
+      live: "https://forever-pink-website.vercel.app/",
+      image: ForeverPink,
+      imagePosition: "50% 35%",
       category: "Client",
     },
     {
@@ -32,12 +33,12 @@ const Projects = () => {
       category: "Client",
     },
     {
-      title: "Digital Thrive Agency",
-      description: "Modern agency website featuring smooth scroll animations and a dark-mode aesthetic to showcase digital services.",
-      tech: ["React", "Framer Motion", "UI/UX"],
+      title: "LeoPrint Client Portal",
+      description: "A commercial landing page and portal for a printing business. Focused on accessibility and quick information retrieval.",
+      tech: ["React", "Vite", "TailwindCSS"],
       github: null, // Private/Client
-      live: "https://digitalthrivee.com/",
-      image: DigitalThrive,
+      live: "https://leo-print.vercel.app/",
+      image: LeoPrint,
       category: "Client",
     },
     {
@@ -98,28 +99,42 @@ const Projects = () => {
             >
               {/* Image Overlay */}
               <div className="h-48 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-transparent group-hover:bg-primary/10 transition-colors z-10 w-full h-full"></div>
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out"
-                  />
+                <div className="absolute inset-0 bg-transparent group-hover:bg-primary/10 transition-colors z-10 w-full h-full"></div>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out"
+                />
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                     <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
                         {project.title}
                     </h3>
-                    <div className="flex gap-4">
+                    <div className="flex items-center gap-2 shrink-0">
                         {project.github && (
-                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-primary transition-colors">
-                                <Github size={20} />
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Open ${project.title} source code`}
+                              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-text-muted hover:text-primary hover:border-primary/50 hover:bg-primary/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                            >
+                                <Github size={18} />
                             </a>
                         )}
-                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-primary transition-colors">
-                            <ExternalLink size={20} />
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Open ${project.title} live site`}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-xs font-semibold tracking-wide text-primary hover:bg-primary hover:text-bg-dark transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                        >
+                            Live Site
+                            <ExternalLink size={14} />
                         </a>
                     </div>
                 </div>
