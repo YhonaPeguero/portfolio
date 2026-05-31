@@ -1,0 +1,13 @@
+# Netlify build configuration.
+#
+# Workaround for npm's optional-dependency bug (https://github.com/npm/cli/issues/4828):
+# the committed package-lock.json is generated on Windows, so a normal install on
+# Netlify's Linux builders can miss Rollup's platform-specific native binary
+# (@rollup/rollup-linux-x64-gnu), which makes `vite build` crash. Doing a clean,
+# lock-free install lets npm resolve the correct binary for the build platform.
+[build]
+  command = "rm -rf node_modules package-lock.json && npm install && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
