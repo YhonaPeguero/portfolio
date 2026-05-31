@@ -37,12 +37,15 @@ export default function SideQuests() {
                   {q.title}
                 </h3>
                 <span
-                  className={`border px-2 py-0.5 font-mono text-[9px] tracking-widest ${statusStyle[q.status]}`}
+                  className={`border px-2 py-0.5 font-mono text-[11px] tracking-wider ${statusStyle[q.status]}`}
                 >
                   {q.status}
                 </span>
               </div>
-              <p className="font-mono text-[11px] tracking-wider text-ink-faint">{q.org}</p>
+              <p className="font-mono text-[11px] tracking-wider text-ink-faint">
+                {q.org}
+                {q.period && <span className="text-ink-faint/70"> · {q.period}</span>}
+              </p>
               <p className="mt-2 font-ui text-sm leading-relaxed text-ink-muted">{q.description}</p>
               {q.link && (
                 <a

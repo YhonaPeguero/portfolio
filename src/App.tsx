@@ -13,6 +13,9 @@
  *  - react-router (single page), react-scroll (native scrollIntoView),
  *    react-intersection-observer (native IntersectionObserver hook).
  */
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import BootSequence from "./components/BootSequence";
 import Overlays from "./components/fx/Overlays";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
@@ -27,21 +30,17 @@ import { useActiveSection } from "./lib/hooks";
 
 const SECTION_IDS = ["home", "skills", "projects", "experience", "sidequests", "contact"];
 
-// Companion dialogue keys map onto section ids (home → "hero").
-const DIALOGUE_KEY: Record<string, string> = {
-  home: "hero",
-  skills: "skills",
-  projects: "projects",
-  experience: "experience",
-  sidequests: "sidequests",
-  contact: "contact",
-};
-
 export default function App() {
   const active = useActiveSection(SECTION_IDS);
+  const [booting, setBooting] = useState(true);
 
   return (
     <div className="relative min-h-screen bg-void text-ink">
+      {/* Full-screen intro loader — plays once on initial load */}
+      <AnimatePresence>
+        {booting && <BootSequence onComplete={() => setBooting(false)} />}
+      </AnimatePresence>
+
       {/* Skip link for keyboard / screen-reader users */}
       <a
         href="#projects"
@@ -63,7 +62,7 @@ export default function App() {
       </main>
 
       <Footer />
-      <Companion section={DIALOGUE_KEY[active] ?? "boot"} />
+      <Companion />
     </div>
   );
 }

@@ -13,11 +13,15 @@
   --cyan: #00f5ff;
   --magenta: #ff006e;
   --amber: #ffb800;
+  /* shared easing for the hero panel (Phase: TIMING) */
+  --ease-hero: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Keep section headings clear of the fixed nav when jumping via links. */
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -182,6 +186,45 @@
 @keyframes glitchBottom {
   0% { clip-path: inset(70% 0 0 0); }
   100% { clip-path: inset(40% 0 0 0); }
+}
+
+/* ---------- Hero hologram figure (right panel) ---------- */
+/* Holographic hue-rotate flicker */
+@keyframes holoFlicker {
+  0%, 100% { filter: hue-rotate(0deg) brightness(1); opacity: 1; }
+  20% { filter: hue-rotate(-14deg) brightness(1.12); }
+  45% { filter: hue-rotate(10deg) brightness(0.95); opacity: 0.9; }
+  60% { filter: hue-rotate(-6deg) brightness(1.08); opacity: 1; }
+  82% { filter: hue-rotate(4deg) brightness(0.98); opacity: 0.95; }
+}
+.holo-flicker {
+  animation: holoFlicker 6s ease-in-out infinite;
+}
+
+/* Localised scanline overlay for the figure */
+@keyframes hfScan {
+  from { background-position-y: 0; }
+  to { background-position-y: 6px; }
+}
+.hf-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 245, 255, 0.14) 0,
+    rgba(0, 245, 255, 0.14) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  animation: hfScan 0.6s linear infinite;
+  mix-blend-mode: overlay;
+}
+
+/* Per-node glow pulse (random delay/duration set inline) */
+@keyframes nodePulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+.hf-node-pulse {
+  animation: nodePulse 3s ease-in-out infinite;
 }
 
 /* Hide decorative motion for users who prefer reduced motion */

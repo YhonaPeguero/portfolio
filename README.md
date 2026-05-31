@@ -101,9 +101,27 @@ directory explicitly:
 Everything is data-driven — edit the files in `src/data/` to update copy:
 
 - `profile.ts` — name, roles, socials, CV (and the X/Twitter handle to verify).
-- `projects.ts` — the Mission Log cards.
+- `projects.ts` — the Mission Log cards. Each has a `category: "web2" | "web3"`
+  which drives the WEB2 / WEB3 tabs; copy an entry to add a project.
 - `skills.ts` / `experience.ts` / `sideQuests.ts` — section content.
-- `dialogue.ts` — PIXL's lines per section.
+- `companionInfo.ts` — the topics/answers PIXL surfaces about you.
+
+### Hero figure asset
+
+The hero right-panel renders a single composite artwork (the holographic dev
+figure with the AI-agent nodes baked in) from:
+
+```
+public/hero/figure.png
+```
+
+The image's black background is dropped with `mix-blend-mode: screen`, so only
+the blue hologram blends onto the hero. Drag rotates it on the Y axis (with
+inertia), it scales/parallaxes and dissolves on scroll, idle-floats, and has a
+hue-rotate flicker + scanline overlay. Renders on `lg+` screens and respects
+`prefers-reduced-motion`. If `figure.png` is missing the panel stays empty (no
+placeholder art). To swap the file, just replace it — the path is the `ASSETS`
+constant in `src/components/three/HeroFigure.tsx`.
 
 ---
 

@@ -2,15 +2,33 @@ export interface SideQuest {
   title: string;
   org: string;
   status: "COMPLETE" | "ACTIVE" | "ONGOING";
+  /** Optional date range */
+  period?: string;
   description: string;
   link?: string;
 }
 
 /**
  * Web3 & open-source "side quests" — community + on-chain activity.
- * Sourced from the live portfolio + project briefs.
+ * Sourced from LinkedIn + project briefs.
  */
 export const sideQuests: SideQuest[] = [
+  {
+    title: "Binance Angel",
+    org: "Binance · Web3",
+    period: "2026",
+    status: "COMPLETE",
+    description:
+      "Web3 technical-community role — designed educational content for builders and helped newcomers use the crypto ecosystem responsibly.",
+  },
+  {
+    title: "Base LATAM Ambassador",
+    org: "Coinbase · Base",
+    period: "2025 — 2026",
+    status: "COMPLETE",
+    description:
+      "Created technical & educational content to drive Web3 adoption across LATAM — accessible, practical onchain onboarding for the Base community.",
+  },
   {
     title: "StandX Community Contributions",
     org: "StandX · DeFi",
@@ -33,12 +51,5 @@ export const sideQuests: SideQuest[] = [
     status: "ONGOING",
     description:
       "On-chain reputation experiment on Solana — exploring verifiable identity & trust primitives in Web3.",
-  },
-  {
-    title: "Base LATAM Ambassador",
-    org: "Base · Ecosystem",
-    status: "ONGOING",
-    description:
-      "Growing the Base ecosystem across Latin America — onboarding builders and running community education.",
   },
 ];

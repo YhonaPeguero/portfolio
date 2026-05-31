@@ -96,7 +96,11 @@ function CameraRig({ enabled = true }: { enabled?: boolean }) {
 export default function HeroScene({ reduced = false }: { reduced?: boolean }) {
   return (
     <Canvas
-      className="absolute inset-0 -z-10"
+      className="-z-10"
+      // R3F sets an inline `position: relative` on its container, which would
+      // override a Tailwind `absolute` class and make the canvas an in-flow
+      // flex item. Force absolute via inline style so it stays a background.
+      style={{ position: "absolute", inset: 0 }}
       dpr={[1, 1.75]}
       camera={{ position: [0, 0.5, 9], fov: 60 }}
       gl={{ antialias: true, powerPreference: "high-performance" }}

@@ -2,13 +2,15 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { profile } from "../../data/profile";
 
+// Plain, scannable labels for navigation clarity; the themed codename is kept
+// as a tooltip so the game flavour survives without confusing visitors.
 const links = [
-  { id: "home", label: "BOOT" },
-  { id: "skills", label: "ARSENAL" },
-  { id: "projects", label: "MISSIONS" },
-  { id: "experience", label: "STATS" },
-  { id: "sidequests", label: "QUESTS" },
-  { id: "contact", label: "CONNECT" },
+  { id: "home", label: "HOME", code: "BOOT" },
+  { id: "skills", label: "SKILLS", code: "ARSENAL" },
+  { id: "projects", label: "PROJECTS", code: "MISSIONS" },
+  { id: "experience", label: "EXPERIENCE", code: "STATS" },
+  { id: "sidequests", label: "WEB3", code: "QUESTS" },
+  { id: "contact", label: "CONTACT", code: "CONNECT" },
 ];
 
 function scrollTo(id: string) {
@@ -41,7 +43,8 @@ export default function Nav({ active }: { active: string }) {
                 <button
                   onClick={() => scrollTo(l.id)}
                   aria-current={isActive ? "true" : undefined}
-                  className={`relative px-3 py-1.5 font-mono text-xs tracking-widest transition-colors ${
+                  title={l.code}
+                  className={`relative whitespace-nowrap px-3 py-1.5 font-mono text-[13px] font-medium tracking-[0.08em] transition-colors ${
                     isActive ? "text-cyan" : "text-ink-muted hover:text-ink"
                   }`}
                 >

@@ -25,8 +25,8 @@ module.exports = {
         },
         ink: {
           DEFAULT: "#E8EEF2", // high-contrast body text (≈ 14:1 on void)
-          muted: "#9AA7B4", // muted text — still ≥ 4.5:1 on void
-          faint: "#5C6773",
+          muted: "#A8B4C0", // secondary text — ≈ 8.6:1 on void
+          faint: "#7E8B99", // micro-labels — ≈ 5.7:1 on void (WCAG AA)
         },
       },
       fontFamily: {

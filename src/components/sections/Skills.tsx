@@ -38,7 +38,7 @@ export default function Skills() {
               <h3 className={`font-display text-lg font-bold tracking-wider ${textColor[cat.accent]}`}>
                 {cat.title}
               </h3>
-              <span className="font-mono text-[10px] tracking-widest text-ink-faint">
+              <span className="font-mono text-[11px] tracking-wider text-ink-faint">
                 {cat.subtitle}
               </span>
             </div>
