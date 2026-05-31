@@ -8,12 +8,25 @@ import { usePrefersReducedMotion } from "../../lib/hooks";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Hero right-panel — the holographic operator (Yhonatan's composite artwork:
- * figure + AI-agent nodes + topology baked in). Always rendered so it never
- * disappears after the intro hands off.
+ * A few "AI agent" HUD nodes that orbit the operator. Kept brief and subtle so
+ * they read as ambient context, not clutter. `left/top` = card position (% of
+ * the box); `ax/ay` = the point its connector line links to.
+ */
+const NODES = [
+  { label: "CODE REVIEWER", dept: "DEVOPS", left: 0, top: 5, ax: 16, ay: 15 },
+  { label: "REFACTORER", dept: "AI ENGINE", left: 64, top: 0, ax: 78, ay: 10 },
+  { label: "TESTER", dept: "DIAGNOSTIC", left: 76, top: 35, ax: 86, ay: 41 },
+  { label: "SECURITY", dept: "QA AGENT", left: 62, top: 80, ax: 76, ay: 82 },
+  { label: "API DESIGNER", dept: "BACKEND", left: -1, top: 64, ax: 14, ay: 68 },
+];
+
+/**
+ * Hero right-panel — the holographic operator (transparent avatar) with a few
+ * floating AI-agent nodes. Always rendered so it never disappears after the
+ * intro hands off.
  *
  * React + GSAP: drag to rotate (Y, inertia), scroll parallax, idle float;
- * mix-blend + flicker + scanlines + glow + particles for the holographic feel.
+ * drop-shadow glow + breathing + glow pool + particles for the holographic feel.
  */
 export default function HeroFigure({ ready = false }: { ready?: boolean }) {
   const reduced = usePrefersReducedMotion();
@@ -135,6 +148,52 @@ export default function HeroFigure({ ready = false }: { ready?: boolean }) {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* AI-agent nodes + connectors */}
+      <div className="hf-nodes pointer-events-none absolute inset-0">
+        <svg
+          className="absolute inset-0 h-full w-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <g stroke="#00f5ff" strokeWidth="0.12" strokeOpacity="0.25" fill="none">
+            {NODES.map((n) => (
+              <line key={n.label} x1="50" y1="48" x2={n.ax} y2={n.ay} />
+            ))}
+          </g>
+          <g fill="#00f5ff" fillOpacity="0.5">
+            {NODES.map((n) => (
+              <circle key={n.label} cx={n.ax} cy={n.ay} r="0.55" />
+            ))}
+          </g>
+        </svg>
+
+        {NODES.map((n, i) => (
+          <div
+            key={n.label}
+            className="absolute w-[104px]"
+            style={{ left: `${n.left}%`, top: `${n.top}%` }}
+          >
+            <div className="hud-corners border border-cyan/25 bg-void-800/70 px-2 py-1 backdrop-blur-sm">
+              <div className="flex items-center justify-between font-mono text-[6.5px] leading-none tracking-[0.15em] text-cyan/70">
+                <span>AI&nbsp;AGENT</span>
+                <span className="text-ink-faint">{n.dept}</span>
+              </div>
+              <p className="mt-1 font-display text-[10px] font-bold leading-none tracking-wide text-ink/90">
+                {n.label}
+              </p>
+              <div className="mt-1 flex items-center gap-1 font-mono text-[6.5px] tracking-[0.15em] text-ink-faint">
+                <span
+                  className="hf-node-pulse inline-block h-1 w-1 rounded-full bg-cyan"
+                  style={{ animationDelay: `${(i * 0.5).toFixed(1)}s` }}
+                />
+                STATUS: ACTIVE
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
