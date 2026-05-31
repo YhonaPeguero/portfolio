@@ -15,7 +15,7 @@
  */
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import BootSequence from "./components/BootSequence";
+import IntroSequence from "./components/IntroSequence";
 import Overlays from "./components/fx/Overlays";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
@@ -36,9 +36,9 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-void text-ink">
-      {/* Full-screen intro loader — plays once on initial load */}
+      {/* Cinematic intro — hooded character types, then glides into the hero */}
       <AnimatePresence>
-        {booting && <BootSequence onComplete={() => setBooting(false)} />}
+        {booting && <IntroSequence onComplete={() => setBooting(false)} />}
       </AnimatePresence>
 
       {/* Skip link for keyboard / screen-reader users */}
@@ -53,7 +53,7 @@ export default function App() {
       <Nav active={active} />
 
       <main>
-        <Hero />
+        <Hero ready={!booting} />
         <Skills />
         <Projects />
         <Experience />

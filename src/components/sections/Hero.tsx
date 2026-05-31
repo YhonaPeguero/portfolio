@@ -17,7 +17,7 @@ function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-export default function Hero() {
+export default function Hero({ ready = true }: { ready?: boolean }) {
   const reduced = usePrefersReducedMotion();
   const webgl = useMemo(() => isWebGLAvailable(), []);
   // Figure only appears where there's real room beside the text (xl+).
@@ -101,7 +101,7 @@ export default function Hero() {
           <div className="w-[42%] max-w-[500px]">
             {isWide && (
               <Suspense fallback={null}>
-                <HeroFigure />
+                <HeroFigure ready={ready} />
               </Suspense>
             )}
           </div>
