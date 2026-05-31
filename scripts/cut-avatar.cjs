@@ -15,14 +15,17 @@ const png = PNG.sync.read(fs.readFileSync(src));
 const { data, width: W, height: H } = png;
 const N = W * H;
 
-// Candidate background = neutral grey in the checkerboard's luminance range.
+// Candidate background = greyish (the checkerboard + its anti-aliased fringe)
+// within its luminance range. There's a clear gap — the figure is strongly
+// blue (chroma >= ~40 wherever it's lit; its dark parts sit below lum 36) — so
+// a chroma threshold up to ~30 sweeps the grey halo without eating the figure.
 const isBg = new Uint8Array(N);
 for (let p = 0; p < N; p++) {
   const i = p * 4;
   const r = data[i], g = data[i + 1], b = data[i + 2];
   const chroma = Math.max(r, g, b) - Math.min(r, g, b);
   const lum = (r + g + b) / 3;
-  if (chroma < 12 && lum > 38 && lum < 120) isBg[p] = 1;
+  if (chroma < 30 && lum > 36 && lum < 124) isBg[p] = 1;
 }
 
 // Flood fill from every border pixel through connected candidate-bg pixels.
