@@ -28,7 +28,7 @@ import SideQuests from "./components/sections/SideQuests";
 import Contact from "./components/sections/Contact";
 import { useActiveSection } from "./lib/hooks";
 
-const SECTION_IDS = ["home", "skills", "projects", "experience", "sidequests", "contact"];
+const SECTION_IDS = ["home", "skills", "projects", "sidequests", "experience", "contact"];
 
 export default function App() {
   const active = useActiveSection(SECTION_IDS);
@@ -56,8 +56,8 @@ export default function App() {
         <Hero ready={!booting} />
         <Skills />
         <Projects />
-        <Experience />
         <SideQuests />
+        <Experience />
         <Contact />
       </main>
 

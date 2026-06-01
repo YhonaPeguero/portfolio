@@ -118,13 +118,13 @@ export const education: Credential[] = [
   { title: "English · Pre-Intermediate", org: "King's College London", year: "2021" },
 ];
 
-/** Certifications (from LinkedIn). */
+/** Certifications. */
 export const certifications: string[] = [
+  "Claude Code in Action",
   "JavaScript Algorithms & Data Structures",
   "Responsive Web Design",
   "Scrum Foundation (SFPC)",
-  "Claude Code in Action",
 ];
 
 /** Spoken languages. */
-export const languages = ["English", "Spanish", "Portuguese"];
+export const languages = ["Spanish", "English"];

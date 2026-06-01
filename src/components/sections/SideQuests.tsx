@@ -20,7 +20,7 @@ export default function SideQuests() {
   return (
     <section id="sidequests" className="relative mx-auto max-w-7xl px-5 py-24 md:py-32">
       <SectionHeading
-        index="04"
+        index="03"
         title="SIDE QUESTS"
         kanji="依頼"
         accent="cyan"

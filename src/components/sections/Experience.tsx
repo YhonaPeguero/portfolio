@@ -94,7 +94,7 @@ export default function Experience() {
   return (
     <section id="experience" className="relative mx-auto max-w-5xl px-5 py-24 md:py-32">
       <SectionHeading
-        index="03"
+        index="04"
         title="CHARACTER STATS"
         kanji="経歴"
         accent="amber"
