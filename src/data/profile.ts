@@ -2,10 +2,7 @@ import cvFile from "../assets/Yhonatan Peguero-CV.pdf";
 
 /**
  * Single source of truth for personal / contact data.
- * Pulled from the live portfolio + CV — not invented.
- *
- * NOTE: `x` (Twitter) handle is the best guess from the GitHub username.
- *       Update it if the real handle differs.
+ * Social links are Yhonatan's official accounts.
  */
 export const profile = {
   name: "Yhonatan Peguero",
@@ -20,8 +17,8 @@ export const profile = {
   cv: cvFile,
   socials: {
     github: "https://github.com/YhonaPeguero",
-    linkedin: "https://linkedin.com/in/yhona-peguero",
-    x: "https://x.com/YhonaPeguero",
+    linkedin: "https://www.linkedin.com/in/yhonatan-peguero/",
+    x: "https://x.com/thisnotmeeme",
   },
 } as const;
 
