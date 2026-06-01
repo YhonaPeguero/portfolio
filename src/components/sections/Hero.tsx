@@ -21,7 +21,7 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
   const reduced = usePrefersReducedMotion();
   const webgl = useMemo(() => isWebGLAvailable(), []);
   // Figure only appears where there's real room beside the text (xl+).
-  const isWide = useMediaQuery("(min-width: 1280px)");
+  const isWide = useMediaQuery("(min-width: 768px)");
   const name = useScramble(profile.name.toUpperCase());
 
   return (
@@ -92,13 +92,19 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
         </motion.div>
       </div>
 
-      {/* Holographic figure — decorative right-side overlay (xl+ only, lazy).
-          Constrained to the same max-w-7xl track as the text and justified to
-          the right edge, so it never overlaps the copy at any viewport width
-          and never leaves a dead column when the artwork is absent. */}
-      <div className="pointer-events-none absolute inset-0 hidden xl:block">
-        <div className="mx-auto flex h-full max-w-7xl items-center justify-end px-5">
-          <div className="w-[42%] max-w-[500px]">
+      {/* Holographic figure — visible from md upward, scaled down on smaller
+          breakpoints so HUD node cards don't bleed past the viewport edge.
+          Extra right padding at md/lg compensates for the nodes that poke
+          slightly outside the square container. */}
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-end px-5 md:pr-20 lg:pr-14 xl:pr-5">
+          <div
+            className="w-[42%] max-w-[500px] origin-center opacity-75
+                        scale-[0.68] md:scale-[0.68]
+                        lg:scale-[0.82] lg:opacity-85
+                        xl:scale-100 xl:opacity-100
+                        transition-all duration-300"
+          >
             {isWide && (
               <Suspense fallback={null}>
                 <HeroFigure ready={ready} />
