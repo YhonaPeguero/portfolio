@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
 import { sideQuests } from "../../data/sideQuests";
 
@@ -9,7 +10,13 @@ const statusStyle = {
   ONGOING: "border-amber/50 text-amber",
 };
 
+const VISIBLE = 3; // shown before "See more"
+
 export default function SideQuests() {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? sideQuests : sideQuests.slice(0, VISIBLE);
+  const remaining = sideQuests.length - VISIBLE;
+
   return (
     <section id="sidequests" className="relative mx-auto max-w-7xl px-5 py-24 md:py-32">
       <SectionHeading
@@ -21,13 +28,13 @@ export default function SideQuests() {
       />
 
       <div className="grid gap-4 md:grid-cols-2">
-        {sideQuests.map((q, i) => (
+        {visible.map((q, i) => (
           <motion.div
             key={q.title}
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.4, delay: i * 0.08 }}
+            transition={{ duration: 0.4, delay: Math.min(i, 3) * 0.08 }}
             className="hud-panel hud-corners flex items-start gap-4 p-5"
           >
             <span className="mt-1 font-mono text-2xl text-cyan/40">◈</span>
@@ -61,6 +68,22 @@ export default function SideQuests() {
           </motion.div>
         ))}
       </div>
+
+      {remaining > 0 && (
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => setShowAll((s) => !s)}
+            aria-expanded={showAll}
+            className="hud-corners group inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
+          >
+            {showAll ? "See less" : `See ${remaining} more quests`}
+            <ChevronDown
+              size={14}
+              className={`transition-transform ${showAll ? "rotate-180" : ""}`}
+            />
+          </button>
+        </div>
+      )}
     </section>
   );
 }

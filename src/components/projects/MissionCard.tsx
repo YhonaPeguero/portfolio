@@ -28,7 +28,7 @@ export default function MissionCard({ project, index }: { project: Project; inde
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.5, delay: index * 0.07 }}
+      transition={{ duration: 0.5, delay: Math.min(index, 5) * 0.06 }}
       onMouseEnter={() => !coarse && setRevealed(true)}
       onMouseLeave={() => !coarse && setRevealed(false)}
       onFocus={() => setRevealed(true)}
@@ -41,9 +41,18 @@ export default function MissionCard({ project, index }: { project: Project; inde
       {/* Header */}
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
-          <span className="font-mono text-[11px] tracking-wider text-ink-faint">
-            {project.code} // {project.classTag}
-          </span>
+          <div className="mb-0.5 flex items-center gap-2 font-mono text-[11px] tracking-wider">
+            <span
+              className={`border px-1.5 py-px text-[10px] font-bold ${
+                project.category === "web3"
+                  ? "border-magenta/50 text-magenta"
+                  : "border-cyan/40 text-cyan"
+              }`}
+            >
+              {project.category === "web3" ? "WEB3" : "WEB2"}
+            </span>
+            <span className="text-ink-faint">{project.classTag}</span>
+          </div>
           <h3
             className="glitch font-display text-2xl font-bold tracking-wide text-ink"
             data-text={project.name}

@@ -1,21 +1,15 @@
-import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
 import MissionCard from "../projects/MissionCard";
-import { projects, projectCategories, type ProjectCategory } from "../../data/projects";
+import { projects } from "../../data/projects";
+
+const VISIBLE = 6; // shown before "See more"
 
 export default function Projects() {
-  const [tab, setTab] = useState<ProjectCategory>("web2");
-
-  const counts = useMemo(
-    () => ({
-      web2: projects.filter((p) => p.category === "web2").length,
-      web3: projects.filter((p) => p.category === "web3").length,
-    }),
-    []
-  );
-
-  const filtered = useMemo(() => projects.filter((p) => p.category === tab), [tab]);
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? projects : projects.slice(0, VISIBLE);
+  const remaining = projects.length - VISIBLE;
 
   return (
     <section id="projects" className="relative mx-auto max-w-7xl px-5 py-24 md:py-32">
@@ -24,60 +18,30 @@ export default function Projects() {
         title="MISSION LOG"
         kanji="任務"
         accent="magenta"
-        subtitle="Selected builds, split by sector. Hover or focus a card to decrypt the mission intel."
+        subtitle="Selected builds, most impactful first. Hover or focus a card to decrypt the intel."
       />
 
-      {/* Sector tabs: WEB2 / WEB3 */}
-      <div
-        role="tablist"
-        aria-label="Project category"
-        className="mb-8 inline-flex border border-white/10 bg-void-800/60 p-1 backdrop-blur-md"
-      >
-        {projectCategories.map((c) => {
-          const active = tab === c.id;
-          return (
-            <button
-              key={c.id}
-              role="tab"
-              aria-selected={active}
-              onClick={() => setTab(c.id)}
-              className={`relative px-5 py-2 font-mono text-xs tracking-[0.2em] transition-colors ${
-                active ? "text-void" : "text-ink-muted hover:text-ink"
-              }`}
-            >
-              {active && (
-                <motion.span
-                  layoutId="tab-pill"
-                  className="absolute inset-0 -z-10 bg-cyan shadow-neon-cyan"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              {c.label}
-              <span className={`ml-2 ${active ? "text-void/70" : "text-ink-faint"}`}>
-                {counts[c.id]}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Keyed wrapper re-mounts on tab change so cards re-stagger in.
-          No exit animation (mode="wait") — the swap never blocks on rAF. */}
-      <motion.div
-        key={tab}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25 }}
-        className="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
-      >
-        {filtered.map((p, i) => (
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {visible.map((p, i) => (
           <MissionCard key={p.code} project={p} index={i} />
         ))}
-      </motion.div>
+      </div>
 
-      <p className="mt-6 font-mono text-[11px] text-ink-faint">
-        ◆ {projects.length} missions logged · {counts.web2} Web2 · {counts.web3} Web3 · all builds live
-      </p>
+      {remaining > 0 && (
+        <div className="mt-8 flex justify-center">
+          <button
+            onClick={() => setShowAll((s) => !s)}
+            aria-expanded={showAll}
+            className="hud-corners group inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
+          >
+            {showAll ? "See less" : `See ${remaining} more projects`}
+            <ChevronDown
+              size={14}
+              className={`transition-transform ${showAll ? "rotate-180" : ""}`}
+            />
+          </button>
+        </div>
+      )}
     </section>
   );
 }
