@@ -1,34 +1,30 @@
-// One-off: avatar.png was exported with the transparency checkerboard flattened
-// into the pixels (RGBA but fully opaque), so we remove it to get real alpha.
-// The checkerboard is neutral grey (chroma ~0, luminance ~54/95); the figure is
-// blue-tinted (chroma >= ~13 even in the dark hoodie). We FLOOD-FILL from the
-// borders through neutral-grey pixels so only the connected background is keyed
-// out — internal details (laptop screen) are preserved.
+// One-off: turn the flattened light background of avatar-pj2.png into real
+// transparency. A simple colour threshold leaves fringe and can't tell the
+// background from light details inside the figure (laptop text, highlights),
+// so we FLOOD-FILL from the image borders: only light, low-chroma pixels that
+// are connected to the edge are background. Internal light pixels are kept.
 const fs = require("fs");
 const path = require("path");
 const { PNG } = require("pngjs");
 
-const src = path.join(__dirname, "..", "src", "assets", "avatar.png");
-const out = path.join(__dirname, "..", "src", "assets", "avatar-cut.png");
+const src = path.join(__dirname, "..", "src", "assets", "avatar-pj2.png");
+const out = path.join(__dirname, "..", "src", "assets", "avatar-pj2-cut.png");
 
 const png = PNG.sync.read(fs.readFileSync(src));
 const { data, width: W, height: H } = png;
 const N = W * H;
 
-// Candidate background = greyish (the checkerboard + its anti-aliased fringe)
-// within its luminance range. There's a clear gap — the figure is strongly
-// blue (chroma >= ~40 wherever it's lit; its dark parts sit below lum 36) — so
-// a chroma threshold up to ~30 sweeps the grey halo without eating the figure.
+// 1. Candidate background = light + near-neutral (figure + glow are bluer/darker).
 const isBg = new Uint8Array(N);
 for (let p = 0; p < N; p++) {
   const i = p * 4;
   const r = data[i], g = data[i + 1], b = data[i + 2];
   const chroma = Math.max(r, g, b) - Math.min(r, g, b);
   const lum = (r + g + b) / 3;
-  if (chroma < 30 && lum > 36 && lum < 124) isBg[p] = 1;
+  if (chroma < 38 && lum > 150) isBg[p] = 1;
 }
 
-// Flood fill from every border pixel through connected candidate-bg pixels.
+// 2. Flood fill from every border pixel through connected candidate-bg pixels.
 const reached = new Uint8Array(N);
 const stack = new Uint32Array(N);
 let sp = 0;
@@ -56,15 +52,19 @@ while (sp > 0) {
   if (y < H - 1) seed(p + W);
 }
 
-// Apply alpha + a soft base fade so the figure dissolves at the bottom.
-const fadeStart = H * 0.93;
+// 3. Apply alpha: reached background → transparent; everything else kept.
+//    Plus a soft fade over the bottom so the figure dissolves (no base edge).
+const fadeStart = H * 0.92;
 let cleared = 0;
 for (let p = 0; p < N; p++) {
+  const i = p * 4;
   let alpha = reached[p] ? 0 : 255;
   if (alpha === 0) cleared++;
   const y = (p - (p % W)) / W;
-  if (y > fadeStart) alpha = Math.round(alpha * Math.max(0, (H - y) / (H - fadeStart)));
-  data[p * 4 + 3] = alpha;
+  if (y > fadeStart) {
+    alpha = Math.round(alpha * Math.max(0, (H - y) / (H - fadeStart)));
+  }
+  data[i + 3] = alpha;
 }
 
 fs.writeFileSync(out, PNG.sync.write(png));
