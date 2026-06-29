@@ -9,7 +9,7 @@ export const profile = {
   alias: "YHONA",
   os: "YHONATAN_OS",
   version: "v2.0",
-  roles: ["Senior Frontend Engineer", "Web3 Builder", "DeFi Contributor"],
+  roles: ["Senior Software Engineer", "Web3 Builder", "DeFi Contributor"],
   tagline: "I build next-gen web products at the intersection of UX, performance & on-chain.",
   location: "Santo Domingo, Dominican Republic",
   kanji: "開発者", // "developer"

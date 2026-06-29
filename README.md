@@ -1,7 +1,7 @@
 # YHONATAN_OS // v2.0
 
 An interactive, cyberpunk / anime / retro-gaming portfolio landing page for
-**Yhonatan Peguero** — Senior Frontend Engineer · Web3 Builder · DeFi Contributor.
+**Yhonatan Peguero** — Senior Software Engineer · Web3 Builder · DeFi Contributor.
 
 It's built to feel like the boot screen of a next-gen game: a live 3D hero scene,
 a terminal boot sequence, an AI guide companion, and RPG-styled sections — while

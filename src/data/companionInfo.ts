@@ -20,7 +20,7 @@ export const infoTopics: InfoTopic[] = [
     label: "Who is Yhonatan?",
     question: "Who is Yhonatan?",
     answer:
-      "Yhonatan Peguero — a Senior Frontend Engineer based in the Dominican Republic with 5+ years building product-driven web apps. He works at the intersection of UX, performance and architecture, and is also a Web3 builder & DeFi contributor.",
+      "Yhonatan Peguero — a Senior Software Engineer based in the Dominican Republic with 5+ years building product-driven web apps. He works at the intersection of UX, performance and architecture, and is also a Web3 builder & DeFi contributor.",
   },
   {
     id: "stack",
@@ -54,6 +54,6 @@ export const infoTopics: InfoTopic[] = [
     id: "contact",
     label: "How to reach him",
     question: "How do I get in touch?",
-    answer: `He's open to senior frontend & Web3 roles and collaborations. Email ${profile.email}, or head to the CONNECT sector to send a transmission and find his socials.`,
+    answer: `He's open to senior software engineering & Web3 roles and collaborations. Email ${profile.email}, or head to the CONNECT sector to send a transmission and find his socials.`,
   },
 ];

@@ -39,7 +39,7 @@ export default function Contact() {
         title="INITIATE CONNECTION"
         kanji="接続"
         accent="magenta"
-        subtitle="Open to senior frontend & Web3 roles, collabs and good problems. Drop a transmission."
+        subtitle="Open to senior software engineering & Web3 roles, collabs and good problems. Drop a transmission."
       />
 
       <motion.form
