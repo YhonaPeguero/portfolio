@@ -49,7 +49,7 @@ export const projects: Project[] = [
       "15 LiteSVM integration tests (role swaps, invalid transitions, vault substitution) and a Codama-generated client.",
     ],
     impact:
-      "Founder-built MVP live on Solana devnet (unaudited): seeded jobs can be explored without connecting a wallet.",
+      "Founder-built MVP live on Solana devnet: seeded jobs can be explored without connecting a wallet.",
   },
   {
     code: "M-02",
@@ -67,7 +67,7 @@ export const projects: Project[] = [
       "Stander, the AI guide, reads the official docs, links its source page and navigates the hub on request. No login.",
       "Free-tier LLM chain (Gemini, Mistral, Groq, OpenRouter) with rate-limit fallthrough to an offline knowledge base.",
     ],
-    impact: "Independent community project, free and login-free. Not an official StandX product.",
+    impact: "Independent community project, free and login-free.",
   },
   {
     code: "M-03",
