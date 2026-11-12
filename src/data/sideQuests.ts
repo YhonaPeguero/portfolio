@@ -32,7 +32,7 @@ export const sideQuests: SideQuest[] = [
   {
     title: "StandX Community Contributions",
     org: "StandX · DeFi",
-    status: "ACTIVE",
+    status: "COMPLETE",
     description:
       "Built and shipped the StandX SIP Guide to help the community understand the protocol's governance process.",
     link: "https://standx-sip-guide.vercel.app",
@@ -48,7 +48,7 @@ export const sideQuests: SideQuest[] = [
   {
     title: "RepuLink (Solana)",
     org: "Solana · Reputation",
-    status: "ONGOING",
+    status: "COMPLETE",
     description:
       "On-chain reputation experiment on Solana — exploring verifiable identity & trust primitives in Web3.",
   },

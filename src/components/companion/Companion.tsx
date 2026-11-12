@@ -71,7 +71,7 @@ export default function Companion() {
             transition={{ type: "spring", stiffness: 300, damping: 26 }}
             role="dialog"
             aria-label="PIXL — information about Yhonatan"
-            className="hud-panel hud-corners relative w-[min(22rem,calc(100vw-2.5rem))] overflow-hidden"
+            className="hud-panel hud-corners relative max-h-[calc(100dvh-6.5rem)] w-[min(22rem,calc(100vw-2.5rem))] overflow-y-auto overflow-x-hidden"
           >
             {/* glow backdrop */}
             <div className="pointer-events-none absolute -top-10 left-1/2 h-32 w-32 -translate-x-1/2 rounded-full bg-cyan/15 blur-3xl" />

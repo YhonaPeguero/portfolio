@@ -59,7 +59,7 @@ export default function SideQuests() {
                   href={q.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-flex items-center gap-1.5 font-mono text-xs text-cyan hover:text-glow-cyan"
+                  className="-mb-1.5 mt-0.5 inline-flex items-center gap-1.5 py-1.5 font-mono text-xs text-cyan hover:text-glow-cyan"
                 >
                   <ExternalLink size={13} /> VIEW
                 </a>
@@ -74,7 +74,7 @@ export default function SideQuests() {
           <button
             onClick={() => setShowAll((s) => !s)}
             aria-expanded={showAll}
-            className="hud-corners group inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
+            className="hud-corners group relative inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
           >
             {showAll ? "See less" : `See ${remaining} more quests`}
             <ChevronDown

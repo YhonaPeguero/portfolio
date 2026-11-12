@@ -32,7 +32,7 @@ export default function Projects() {
           <button
             onClick={() => setShowAll((s) => !s)}
             aria-expanded={showAll}
-            className="hud-corners group inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
+            className="hud-corners group relative inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
           >
             {showAll ? "See less" : `See ${remaining} more projects`}
             <ChevronDown

@@ -72,7 +72,7 @@ function RoleCard({ node, index }: { node: ExperienceRole; index: number }) {
           <button
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
-            className="mt-3 inline-flex items-center gap-1 font-mono text-[12px] font-medium tracking-wider text-cyan/80 transition-colors hover:text-cyan"
+            className="-mb-1.5 mt-1.5 inline-flex items-center gap-1 py-1.5 font-mono text-[12px] font-medium tracking-wider text-cyan/80 transition-colors hover:text-cyan"
           >
             {open ? "Read less" : `Read more (+${node.highlights.length - HL_VISIBLE})`}
             <ChevronDown
@@ -114,7 +114,7 @@ export default function Experience() {
           <button
             onClick={() => setShowAll((s) => !s)}
             aria-expanded={showAll}
-            className="hud-corners group inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
+            className="hud-corners group relative inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
           >
             {showAll ? "See less" : `See ${remaining} more roles`}
             <ChevronDown

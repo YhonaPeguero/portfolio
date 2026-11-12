@@ -22,7 +22,7 @@ export default function Nav({ active }: { active: string }) {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4">
         {/* Brand */}
         <button
           onClick={() => scrollTo("home")}
@@ -44,7 +44,7 @@ export default function Nav({ active }: { active: string }) {
                   onClick={() => scrollTo(l.id)}
                   aria-current={isActive ? "true" : undefined}
                   title={l.code}
-                  className={`relative whitespace-nowrap px-3 py-1.5 font-mono text-[13px] font-medium tracking-[0.08em] transition-colors ${
+                  className={`relative whitespace-nowrap px-2 py-1.5 font-mono text-[12px] font-medium tracking-[0.08em] transition-colors lg:px-3 lg:text-[13px] ${
                     isActive ? "text-cyan" : "text-ink-muted hover:text-ink"
                   }`}
                 >

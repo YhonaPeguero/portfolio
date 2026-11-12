@@ -113,7 +113,7 @@ export default function MissionCard({ project, index }: { project: Project; inde
           href={project.live}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 font-mono text-xs tracking-wider text-cyan hover:text-glow-cyan"
+          className="-my-2 flex items-center gap-1.5 py-2 font-mono text-xs tracking-wider text-cyan hover:text-glow-cyan"
         >
           <ExternalLink size={14} /> LIVE
         </a>
@@ -122,7 +122,7 @@ export default function MissionCard({ project, index }: { project: Project; inde
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 font-mono text-xs tracking-wider text-ink-muted hover:text-ink"
+            className="-my-2 flex items-center gap-1.5 py-2 font-mono text-xs tracking-wider text-ink-muted hover:text-ink"
           >
             <Github size={14} /> CODE
           </a>

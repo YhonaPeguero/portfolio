@@ -34,7 +34,7 @@ export default function Skills() {
             transition={{ duration: 0.5, delay: ci * 0.08 }}
             className="hud-panel hud-corners p-5"
           >
-            <div className="mb-5 flex items-baseline justify-between">
+            <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
               <h3 className={`font-display text-lg font-bold tracking-wider ${textColor[cat.accent]}`}>
                 {cat.title}
               </h3>

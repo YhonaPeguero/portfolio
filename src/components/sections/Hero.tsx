@@ -97,7 +97,7 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
           Extra right padding at md/lg compensates for the nodes that poke
           slightly outside the square container. */}
       <div className="pointer-events-none absolute inset-0 hidden md:block">
-        <div className="mx-auto flex h-full max-w-7xl items-center justify-end px-5 md:pr-20 lg:pr-14 xl:pr-5">
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-end px-5 md:pr-0 lg:pr-14 xl:pr-5">
           <div
             className="w-[42%] max-w-[500px] origin-center opacity-75
                         scale-[0.68] md:scale-[0.68]
@@ -117,7 +117,7 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
       {/* Scroll indicator */}
       <button
         onClick={() => scrollTo("skills")}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cyan/70 hover:text-cyan"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cyan/70 hover:text-cyan [@media(max-height:680px)]:hidden"
         aria-label="Scroll to next section"
       >
         <ChevronDown className="animate-float" />

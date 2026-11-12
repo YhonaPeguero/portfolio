@@ -1,5 +1,3 @@
-import foreverPinkCover from "../assets/forever-pink-cover.jpg";
-
 export type ProjectCategory = "web2" | "web3";
 
 export interface Project {
@@ -24,189 +22,123 @@ export interface Project {
 }
 
 /**
- * Mission Log — a single list ordered most-impactful-first (flagship builds
- * up top, client landings last). Web2/Web3 is shown as a small per-card badge
- * (no separate tab row). The first few render up front; the rest are behind a
- * "See more" toggle. Briefs are intentionally one short line; the longer detail
- * (achievements + impact) lives on the card's hover/focus face.
+ * Mission Log — a single list of exactly six projects, ordered
+ * most-impactful-first (RepuLink, the flagship, always leads). Web2/Web3 is
+ * shown as a small per-card badge (no separate tab row). Six fills the grid, so
+ * the "See more" toggle stays hidden unless a seventh is added. Briefs are
+ * intentionally one short line; the longer detail (achievements + impact)
+ * lives on the card's hover/focus face.
  *
  * Data is real — pulled from each project's GitHub README + live site.
  */
 export const projects: Project[] = [
   {
     code: "M-01",
-    name: "RustVenture",
+    name: "RepuLink",
     category: "web3",
-    classTag: "EDU · SOLANA",
+    classTag: "FOUNDER · SOLANA",
     rank: "S",
-    live: "https://rust-venture.vercel.app",
-    github: "https://github.com/YhonaPeguero/RustVenture",
-    brief: "Gamified platform that turns the Rust & Solana learning curve into an XP-driven adventure.",
-    stack: ["React 18", "Vite", "Tailwind", "Framer Motion", "Web Audio API", "Solana"],
+    live: "https://repu-link.vercel.app",
+    github: "https://github.com/YhonaPeguero/RepuLink",
+    brief:
+      "Incubated by WayLearn × Solana Foundation LATAM: escrow that turns paid work into on-chain reputation.",
+    stack: ["Rust", "Anchor", "Solana Kit", "Codama", "React 19", "TypeScript"],
     achievements: [
-      "Built an interactive adventure map with progressive difficulty, XP and unlockable badges (e.g. 'RustVenture Hero').",
-      "Adaptive curriculum that tailors lessons to the learner's existing programming background.",
-      "Immersive UX: Web Audio API ambient audio, chimes and confetti reward loops with LocalStorage progress.",
+      "The client funds a program-owned vault; release, refund and dispute are enforced by a 7-state on-chain machine.",
+      "Settled jobs can be attested via the Solana Attestation Service: the track record belongs to the wallet.",
+      "15 LiteSVM integration tests (role swaps, invalid transitions, vault substitution) and a Codama-generated client.",
     ],
     impact:
-      "Lowers the entry barrier into Solana/Rust for Web3 newcomers — full client-side, zero backend, instantly shippable.",
+      "Founder-built MVP live on Solana devnet (unaudited): seeded jobs can be explored without connecting a wallet.",
   },
   {
     code: "M-02",
-    name: "Turboshop",
-    category: "web2",
-    classTag: "MARKETPLACE · E-COM",
+    name: "StandX Community Hub",
+    category: "web3",
+    classTag: "COMMUNITY · AI",
     rank: "S",
-    live: "https://turboshop.vercel.app",
-    github: "https://github.com/YhonaPeguero/turboshop",
-    brief: "Two-sided auto-parts marketplace built around a 90-minute delivery promise.",
-    stack: ["Next.js", "TypeScript", "Tailwind", "Google Maps API", "Vercel"],
+    live: "https://standx-community-hub.vercel.app/en",
+    github: "https://github.com/YhonaPeguero/standx-community-hub",
+    brief:
+      "Onboarding hub for the StandX perps DEX community, with an AI guide grounded in official docs.",
+    stack: ["Next.js 14", "TypeScript", "Tailwind", "next-intl", "Three.js", "LLM API"],
     achievements: [
-      "Designed a dual-onboarding flow with separate journeys for workshops and parts suppliers.",
-      "Parts-compatibility lookup by license plate, OEM number or vehicle model across 40+ brands.",
-      "Conversion-focused storefront with a 3-step search → validate → receive UX.",
+      "Rebuilt a community-run hub in Next.js: seven sections, from onboarding to brand kit, in six languages.",
+      "Stander, the AI guide, reads the official docs, links its source page and navigates the hub on request. No login.",
+      "Free-tier LLM chain (Gemini, Mistral, Groq, OpenRouter) with rate-limit fallthrough to an offline knowledge base.",
     ],
-    impact:
-      "Covers 40+ vehicle brands with a 90-minute delivery value-prop targeting Santiago's repair market.",
+    impact: "Independent community project, free and login-free. Not an official StandX product.",
   },
   {
     code: "M-03",
-    name: "K-milla",
-    category: "web2",
-    classTag: "CIVIC TECH · AI",
+    name: "StandX SIP Guide",
+    category: "web3",
+    classTag: "DEFI · EDUCATION",
     rank: "S",
-    live: "https://k-milla.vercel.app",
-    github: "https://github.com/YhonaPeguero/K-milla",
-    brief: "Makes Chile's public-health spending & surgery waitlists legible in plain language.",
-    stack: ["Next.js 16", "Turbopack", "TypeScript", "Tailwind", "MiniMax AI", "Vercel"],
+    live: "https://standx-sip-guide.vercel.app/#/en/overview",
+    github: "https://github.com/YhonaPeguero/standx-sip-guide",
+    brief:
+      "Interactive guide to the StandX DEX's improvement proposals (SIPs), with a live yield simulator.",
+    stack: ["React 18", "Vite", "Tailwind", "Framer Motion", "GitHub Actions"],
     achievements: [
-      "Unified two disconnected government datasets (DIPRES budgets + MINSAL waitlists) into one search box.",
-      "8-quarter sparklines and year-over-year variance across 28 regional health services.",
-      "Grounded AI assistant constrained to the injected dataset — search works 100% offline, no hallucination.",
+      "Yield simulator, yield-loop walkthrough and a Community Vaults (SIP-5B) section, in five languages.",
+      "Deep-linkable hash routes carry locale and section, so any view is shareable from a static deploy.",
+      "GitHub Actions CI on every PR: lint, build, i18n coverage and simulator-math checks.",
     ],
-    impact:
-      "Built for Hack@LATAM 2026 (Transparency track), surfacing public-health data relevant to ~15M Chileans.",
+    impact: "Shared by the StandX team in their official Discord, with author credit.",
   },
   {
     code: "M-04",
-    name: "StandX SIP Guide",
+    name: "StandX Stats",
     category: "web3",
-    classTag: "DEFI · COMMUNITY",
+    classTag: "DEFI · ANALYTICS",
     rank: "A",
-    live: "https://standx-sip-guide.vercel.app",
-    github: "https://github.com/YhonaPeguero/standx-sip-guide",
-    brief: "Community explainer that demystifies StandX's SIP governance for DeFi users.",
-    stack: ["JavaScript", "Vite", "Tailwind", "Vercel"],
+    live: "https://standx-stats.vercel.app",
+    brief:
+      "Turns a StandX perps trade export into a performance dashboard, parsed entirely in the browser.",
+    stack: ["React 18", "Vite", "Canvas API", "Vercel"],
     achievements: [
-      "Translated dense DeFi/governance proposal mechanics into an approachable, scannable explainer.",
-      "Open contribution to the StandX community — built and shipped independently.",
-      "Clean, fast, fully responsive static deploy optimized for sharing.",
+      "Computes realized PnL, win rate, profit factor, fees and per-market results from raw trade and order exports.",
+      "Private by design: files are parsed locally, with no login and nothing sent to a server.",
+      "Generates a shareable stats card and ships sample data to try it without an account. English and Spanish.",
     ],
-    impact: "Reduces onboarding friction for StandX governance — a real open-source DeFi community contribution.",
+    impact:
+      "Free community tool: traders review their own performance without handing their history to a third party.",
   },
   {
     code: "M-05",
-    name: "Vocational AI",
-    category: "web2",
-    classTag: "AI · GUIDANCE",
+    name: "StandX Growth Path RPG",
+    category: "web3",
+    classTag: "EDU · GAME",
     rank: "A",
-    live: "https://vocational-ai.vercel.app",
-    github: "https://github.com/YhonaPeguero/VocationalAI",
-    brief: "AI-powered career guide that helps users explore professional paths.",
-    stack: ["React", "Vite", "Tailwind", "LLM API"],
+    live: "https://rpg-standx-game.vercel.app",
+    github: "https://github.com/YhonaPeguero/rpg-standx-game",
+    brief:
+      "Narrative browser RPG that teaches newcomers how to rank up in the StandX DEX community.",
+    stack: ["Next.js 16", "React 19", "TypeScript", "Zustand", "Zod", "Vitest"],
     achievements: [
-      "Built a conversational flow that turns user inputs into tailored vocational guidance.",
-      "Clean, responsive single-page experience with a focused, low-friction UX.",
+      '"Episode I: Origin": six story zones with dialog, quizzes and mini-games, plus daily, weekly and community quests.',
+      "Local-first: game state in Zustand + localStorage and Zod-validated content, no backend. Five locales.",
+      "Core systems (points, ranks, gates, streaks, quests) covered by Vitest unit tests.",
     ],
-    impact: "Applies LLMs to a real-world guidance use-case in an approachable, accessible interface.",
+    impact:
+      "Makes the path from New Stander to Seed, Sprout and Flower something you play instead of read.",
   },
   {
     code: "M-06",
-    name: "LLM Token Calculator",
-    category: "web2",
-    classTag: "DEV TOOL · AI",
+    name: "Wave Rush",
+    category: "web3",
+    classTag: "GAME · THREE.JS",
     rank: "A",
-    live: "https://llmtokenscalulator.netlify.app",
-    github: "https://github.com/YhonaPeguero/llms-tokens-calculator",
-    brief: "Dev utility to estimate token counts and cost for LLM prompts.",
-    stack: ["React", "Vite", "Tailwind"],
+    live: "https://stand-x-wave-rush.vercel.app",
+    brief:
+      "Cel-shaded browser boat racer with a StandX theme, extended from the open-source Wave-Racer.",
+    stack: ["Three.js", "GLSL", "Web Audio API", "Vite"],
     achievements: [
-      "Instant client-side token estimation to help developers budget prompts and API spend.",
-      "Lightweight, single-purpose tool with a fast, no-friction interface.",
+      "Extends the open-source Wave-Racer base (Three.js) with StandX identity and a mascot rider.",
+      "Adds a nitro system fed by drifts, slipstream and clean landings on top of the base racing loop.",
+      "Pause menu with audio, controls and graphics settings.",
     ],
-    impact: "A practical utility for anyone building on LLM APIs — ships as a zero-backend static app.",
-  },
-  {
-    code: "M-07",
-    name: "Forever Pink",
-    category: "web2",
-    classTag: "CLIENT · BRAND",
-    rank: "A",
-    live: "https://forever-pink-website.vercel.app",
-    github: "https://github.com/YhonaPeguero/Forever-Pink_website",
-    cover: foreverPinkCover,
-    brief: "Polished brand site for a beauty lounge — real client delivery.",
-    stack: ["React", "Vite", "Tailwind", "Framer Motion", "Vercel"],
-    achievements: [
-      "Translated a beauty-brand identity into an elegant, conversion-oriented one-page experience.",
-      "Mobile-first responsive layout with smooth scroll-reveal motion and clear booking CTAs.",
-      "Shipped end-to-end for a paying client, from design direction through production deploy.",
-    ],
-    impact: "Real client delivery — turning a brand brief into a live, marketing-ready web presence.",
-  },
-  {
-    code: "M-08",
-    name: "Digital Thrive",
-    category: "web2",
-    classTag: "CLIENT · AGENCY",
-    rank: "A",
-    live: "https://digitalthrivee.com",
-    brief: "Marketing landing page for a client's digital-services brand.",
-    stack: ["React", "Tailwind", "Vercel"],
-    achievements: [
-      "Built a responsive, conversion-focused landing page from a client brief.",
-      "Delivered on a custom domain in production.",
-    ],
-    impact: "Live client work running on its own domain (digitalthrivee.com).",
-  },
-  {
-    code: "M-09",
-    name: "LeoPrint",
-    category: "web2",
-    classTag: "CLIENT · LANDING",
-    rank: "A",
-    live: "https://leo-print.vercel.app",
-    brief: "Landing page built for a print-services client.",
-    stack: ["React", "Tailwind", "Vercel"],
-    achievements: ["Clean, responsive landing page tailored to the client's services and brand."],
-    impact: "Client deliverable shipped to production.",
-  },
-  {
-    code: "M-10",
-    name: "Promo Visa",
-    category: "web2",
-    classTag: "CLIENT · CAMPAIGN",
-    rank: "A",
-    live: "https://promo-visa.netlify.app",
-    brief: "Promotional campaign landing page for a client offer.",
-    stack: ["JavaScript", "CSS", "Netlify"],
-    achievements: ["Built a focused promo/campaign page optimized for a single conversion goal."],
-    impact: "Campaign landing delivered for a client promotion.",
-  },
-  {
-    code: "M-11",
-    name: "Anime App",
-    category: "web2",
-    classTag: "APP · API",
-    rank: "A",
-    live: "https://anime-app-ob.netlify.app",
-    github: "https://github.com/fabioalcocer/anime-app",
-    brief: "Anime browser app consuming a public API to search titles.",
-    stack: ["React", "Vite", "Tailwind", "REST API"],
-    achievements: [
-      "Built API-driven search and listing with a responsive React UI.",
-      "Collaborative build practicing data-fetching and component composition.",
-    ],
-    impact: "Hands-on practice consuming and rendering live API data in React.",
+    impact: "A playable community game that runs in the browser with no install or login.",
   },
 ];
