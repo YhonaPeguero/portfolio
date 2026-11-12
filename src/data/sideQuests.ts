@@ -14,6 +14,13 @@ export interface SideQuest {
  */
 export const sideQuests: SideQuest[] = [
   {
+    title: "RepuLink (Solana)",
+    org: "Solana · Reputation",
+    status: "COMPLETE",
+    description:
+      "On-chain reputation experiment on Solana — exploring verifiable identity & trust primitives in Web3.",
+  },
+  {
     title: "Binance Angel",
     org: "Binance · Web3",
     period: "2026",
@@ -30,14 +37,6 @@ export const sideQuests: SideQuest[] = [
       "Created technical & educational content to drive Web3 adoption across LATAM — accessible, practical onchain onboarding for the Base community.",
   },
   {
-    title: "StandX Community Contributions",
-    org: "StandX · DeFi",
-    status: "COMPLETE",
-    description:
-      "Built and shipped the StandX SIP Guide to help the community understand the protocol's governance process.",
-    link: "https://standx-sip-guide.vercel.app",
-  },
-  {
     title: "Hack@LATAM 2026 — K-milla",
     org: "Hackathon · Civic Tech",
     status: "COMPLETE",
@@ -46,10 +45,11 @@ export const sideQuests: SideQuest[] = [
     link: "https://k-milla.vercel.app",
   },
   {
-    title: "RepuLink (Solana)",
-    org: "Solana · Reputation",
+    title: "StandX Community Contributions",
+    org: "StandX · DeFi",
     status: "COMPLETE",
     description:
-      "On-chain reputation experiment on Solana — exploring verifiable identity & trust primitives in Web3.",
+      "Built and shipped the StandX SIP Guide to help the community understand the protocol's governance process.",
+    link: "https://standx-sip-guide.vercel.app",
   },
 ];
