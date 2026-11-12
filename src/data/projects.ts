@@ -58,10 +58,7 @@ export const projects: Project[] = [
     ],
     impact:
       "Founder-built MVP live on Solana devnet: seeded jobs can be explored without connecting a wallet.",
-<<<<<<< HEAD
     cover: repulinkCover,
-=======
->>>>>>> 5ac65de (text edit)
   },
   {
     code: "M-02",
@@ -80,10 +77,7 @@ export const projects: Project[] = [
       "Free-tier LLM chain (Gemini, Mistral, Groq, OpenRouter) with rate-limit fallthrough to an offline knowledge base.",
     ],
     impact: "Independent community project, free and login-free.",
-<<<<<<< HEAD
     cover: hubCover,
-=======
->>>>>>> 5ac65de (text edit)
   },
   {
     code: "M-03",
