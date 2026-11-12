@@ -49,7 +49,7 @@ export const projects: Project[] = [
     live: "https://repu-link.vercel.app",
     github: "https://github.com/YhonaPeguero/RepuLink",
     brief:
-      "Incubated by WayLearn × Solana Foundation LATAM: escrow that turns paid work into on-chain reputation.",
+      "Incubated by WayLearn × Solana Foundation: escrow that turns paid work into on-chain reputation.",
     stack: ["Rust", "Anchor", "Solana Kit", "Codama", "React 19", "TypeScript"],
     achievements: [
       "The client funds a program-owned vault; release, refund and dispute are enforced by a 7-state on-chain machine.",
@@ -58,7 +58,10 @@ export const projects: Project[] = [
     ],
     impact:
       "Founder-built MVP live on Solana devnet: seeded jobs can be explored without connecting a wallet.",
+<<<<<<< HEAD
     cover: repulinkCover,
+=======
+>>>>>>> 5ac65de (text edit)
   },
   {
     code: "M-02",
@@ -77,7 +80,10 @@ export const projects: Project[] = [
       "Free-tier LLM chain (Gemini, Mistral, Groq, OpenRouter) with rate-limit fallthrough to an offline knowledge base.",
     ],
     impact: "Independent community project, free and login-free.",
+<<<<<<< HEAD
     cover: hubCover,
+=======
+>>>>>>> 5ac65de (text edit)
   },
   {
     code: "M-03",
