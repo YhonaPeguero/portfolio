@@ -137,3 +137,35 @@ export function useScramble(target: string, active = true): string {
 
   return output;
 }
+
+/** True once the page has scrolled past `threshold` px (nav glass state). */
+export function useScrolled(threshold = 24): boolean {
+  const [scrolled, setScrolled] = useState(
+    () => typeof window !== "undefined" && window.scrollY > threshold
+  );
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > threshold);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [threshold]);
+
+  return scrolled;
+}
+
+/**
+ * Freezes page scroll while an overlay (project brief, mobile menu) is open.
+ * `scrollbar-gutter: stable` on <html> keeps the layout from shifting.
+ */
+export function useLockScroll(locked: boolean): void {
+  useEffect(() => {
+    if (!locked) return;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = "hidden";
+    return () => {
+      root.style.overflow = previous;
+    };
+  }, [locked]);
+}

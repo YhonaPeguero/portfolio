@@ -48,7 +48,7 @@ export const infoTopics: InfoTopic[] = [
     label: "Top projects",
     question: "What should I look at first?",
     answer:
-      "Start with the Mission Log: RepuLink (escrow and on-chain reputation on Solana), the StandX Community Hub (onboarding with a docs-grounded AI guide) and the StandX SIP Guide (interactive yield simulator). Each card flips to reveal achievements & impact.",
+      "Start with the Mission Log: RepuLink (escrow and on-chain reputation on Solana), the StandX Community Hub (onboarding with a docs-grounded AI guide) and the StandX SIP Guide (interactive yield simulator). Open any card for its achievements & impact.",
   },
   {
     id: "contact",

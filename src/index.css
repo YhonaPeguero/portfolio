@@ -22,6 +22,9 @@
     scroll-behavior: smooth;
     /* Keep section headings clear of the fixed nav when jumping via links. */
     scroll-padding-top: 5rem;
+    /* Reserve the scrollbar track so opening an overlay (project brief,
+       mobile menu) doesn't shift the page sideways. */
+    scrollbar-gutter: stable;
   }
 
   body {

@@ -1,3 +1,10 @@
+import repulinkCover from "../assets/projects/repulink.webp";
+import hubCover from "../assets/projects/standx-community-hub.webp";
+import sipGuideCover from "../assets/projects/standx-sip-guide.webp";
+import statsCover from "../assets/projects/standx-stats.webp";
+import rpgCover from "../assets/projects/standx-rpg.webp";
+import waveRushCover from "../assets/projects/wave-rush.webp";
+
 export type ProjectCategory = "web2" | "web3";
 
 export interface Project {
@@ -14,20 +21,21 @@ export interface Project {
   brief: string;
   /** Tech badges — styled as game item chips */
   stack: string[];
-  /** Recruiter-readable achievements (back of card) */
+  /** Recruiter-readable achievements (shown in the detail panel) */
   achievements: string[];
   /** Quantified impact / outcome */
   impact: string;
+  /** Real screenshot of the live demo, 784x490 (16:10) WebP */
   cover?: string;
 }
 
 /**
  * Mission Log — a single list of exactly six projects, ordered
- * most-impactful-first (RepuLink, the flagship, always leads). Web2/Web3 is
- * shown as a small per-card badge (no separate tab row). Six fills the grid, so
- * the "See more" toggle stays hidden unless a seventh is added. Briefs are
- * intentionally one short line; the longer detail (achievements + impact)
- * lives on the card's hover/focus face.
+ * most-impactful-first (RepuLink, the flagship, always leads). Order drives
+ * the layout: the first card is the wide feature, the next two are medium and
+ * the rest are small. Web2/Web3 is shown as a small per-card badge. Each card
+ * shows a screenshot, the one-line brief and a few tags; achievements + impact
+ * live in the detail panel that opens from the card.
  *
  * Data is real — pulled from each project's GitHub README + live site.
  */
@@ -50,6 +58,7 @@ export const projects: Project[] = [
     ],
     impact:
       "Founder-built MVP live on Solana devnet: seeded jobs can be explored without connecting a wallet.",
+    cover: repulinkCover,
   },
   {
     code: "M-02",
@@ -68,6 +77,7 @@ export const projects: Project[] = [
       "Free-tier LLM chain (Gemini, Mistral, Groq, OpenRouter) with rate-limit fallthrough to an offline knowledge base.",
     ],
     impact: "Independent community project, free and login-free.",
+    cover: hubCover,
   },
   {
     code: "M-03",
@@ -86,6 +96,7 @@ export const projects: Project[] = [
       "GitHub Actions CI on every PR: lint, build, i18n coverage and simulator-math checks.",
     ],
     impact: "Shared by the StandX team in their official Discord, with author credit.",
+    cover: sipGuideCover,
   },
   {
     code: "M-04",
@@ -104,6 +115,7 @@ export const projects: Project[] = [
     ],
     impact:
       "Free community tool: traders review their own performance without handing their history to a third party.",
+    cover: statsCover,
   },
   {
     code: "M-05",
@@ -123,6 +135,7 @@ export const projects: Project[] = [
     ],
     impact:
       "Makes the path from New Stander to Seed, Sprout and Flower something you play instead of read.",
+    cover: rpgCover,
   },
   {
     code: "M-06",
@@ -140,5 +153,6 @@ export const projects: Project[] = [
       "Pause menu with audio, controls and graphics settings.",
     ],
     impact: "A playable community game that runs in the browser with no install or login.",
+    cover: waveRushCover,
   },
 ];
