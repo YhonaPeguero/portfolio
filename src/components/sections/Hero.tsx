@@ -1,7 +1,8 @@
 import { Suspense, lazy, useMemo } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, ChevronDown } from "lucide-react";
+import { ArrowRight, Download, ChevronDown, Github, Linkedin } from "lucide-react";
 import GameButton from "../ui/GameButton";
+import XIcon from "../ui/XIcon";
 import CSSFallback from "../three/CSSFallback";
 import { profile } from "../../data/profile";
 import { isWebGLAvailable } from "../../lib/webgl";
@@ -12,6 +13,12 @@ const HeroScene = lazy(() => import("../three/HeroScene"));
 // The hologram figure (pulls in GSAP) is desktop-only — lazy-loaded so it
 // never ships to or runs on mobile/tablet.
 const HeroFigure = lazy(() => import("../three/HeroFigure"));
+
+const socials = [
+  { label: "GitHub", href: profile.socials.github, icon: <Github size={18} /> },
+  { label: "LinkedIn", href: profile.socials.linkedin, icon: <Linkedin size={18} /> },
+  { label: "X / Twitter", href: profile.socials.x, icon: <XIcon size={16} /> },
+];
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -88,6 +95,23 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
               DOWNLOAD CV
               <Download size={16} />
             </GameButton>
+          </div>
+
+          {/* Socials */}
+          <div className="mt-6 flex items-center gap-2">
+            <span className="mr-1 font-mono text-[11px] tracking-[0.3em] text-ink-faint">FIND ME</span>
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="grid h-10 w-10 place-items-center border border-white/10 bg-void/40 text-ink-muted transition-colors hover:border-cyan/50 hover:text-cyan"
+              >
+                {s.icon}
+              </a>
+            ))}
           </div>
         </motion.div>
       </div>

@@ -2,16 +2,8 @@ import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Send } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
+import XIcon from "../ui/XIcon";
 import { profile } from "../../data/profile";
-
-/** X / Twitter glyph (lucide ships the legacy bird, so we inline the X). */
-function XIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
 
 const socials = [
   { id: "github", label: "GitHub", href: profile.socials.github, icon: <Github size={20} /> },
@@ -98,7 +90,7 @@ export default function Contact() {
 
           <button
             type="submit"
-            className="hud-corners group inline-flex items-center gap-2 border border-magenta/60 px-6 py-2.5 font-bold uppercase tracking-[0.15em] text-magenta transition-colors hover:bg-magenta hover:text-void hover:shadow-neon-magenta"
+            className="hud-corners group relative inline-flex items-center gap-2 border border-magenta/60 px-6 py-2.5 font-bold uppercase tracking-[0.15em] text-magenta transition-colors hover:bg-magenta hover:text-void hover:shadow-neon-magenta"
           >
             TRANSMIT
             <Send size={15} className="transition-transform group-hover:translate-x-0.5" />

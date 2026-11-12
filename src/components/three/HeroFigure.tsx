@@ -176,7 +176,7 @@ export default function HeroFigure({ ready = false }: { ready?: boolean }) {
             className="absolute w-[104px]"
             style={{ left: `${n.left}%`, top: `${n.top}%` }}
           >
-            <div className="hud-corners border border-cyan/25 bg-void-800/70 px-2 py-1 backdrop-blur-sm">
+            <div className="hud-corners relative border border-cyan/25 bg-void-800/70 px-2 py-1 backdrop-blur-sm">
               <div className="flex items-center justify-between font-mono text-[6.5px] leading-none tracking-[0.15em] text-cyan/70">
                 <span>AI&nbsp;AGENT</span>
                 <span className="text-ink-faint">{n.dept}</span>

@@ -130,7 +130,7 @@ export default function Companion() {
                         <button
                           key={t.id}
                           onClick={() => setTopic(t)}
-                          className="hud-corners border border-cyan/30 bg-cyan/[0.03] px-2.5 py-2 text-left font-mono text-[11px] leading-tight tracking-wide text-ink transition-colors hover:border-cyan hover:bg-cyan/10 hover:text-cyan"
+                          className="hud-corners relative border border-cyan/30 bg-cyan/[0.03] px-2.5 py-2 text-left font-mono text-[11px] leading-tight tracking-wide text-ink transition-colors hover:border-cyan hover:bg-cyan/10 hover:text-cyan"
                         >
                           {t.label}
                         </button>
