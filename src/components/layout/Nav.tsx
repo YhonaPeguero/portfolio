@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 
 import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
 import XIcon from "../ui/XIcon";
 import LanguageSwitch from "./LanguageSwitch";
+import { socialBrand } from "../ui/socialBrand";
 import { profile } from "../../data/profile";
 import { useLockScroll, useScrolled } from "../../lib/hooks";
 import { useCv, useI18n } from "../../i18n/I18nProvider";
@@ -23,10 +24,10 @@ const links = [
 const barLinks = links.filter((l) => l.id !== "home" && l.id !== "contact");
 
 const socials = [
-  { label: "GitHub", href: profile.socials.github, icon: <Github size={18} /> },
-  { label: "LinkedIn", href: profile.socials.linkedin, icon: <Linkedin size={18} /> },
-  { label: "X / Twitter", href: profile.socials.x, icon: <XIcon size={16} /> },
-];
+  { id: "github", label: "GitHub", href: profile.socials.github, icon: <Github size={18} /> },
+  { id: "linkedin", label: "LinkedIn", href: profile.socials.linkedin, icon: <Linkedin size={18} /> },
+  { id: "x", label: "X / Twitter", href: profile.socials.x, icon: <XIcon size={16} /> },
+] as const;
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -240,12 +241,12 @@ export default function Nav({ active }: { active: string }) {
               <div className="flex items-center gap-2">
                 {socials.map((s) => (
                   <a
-                    key={s.label}
+                    key={s.id}
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="grid h-11 w-11 place-items-center border border-white/10 text-ink-muted transition-colors hover:border-cyan/50 hover:text-cyan"
+                    className={`grid h-11 w-11 place-items-center border transition duration-200 ${socialBrand[s.id]}`}
                   >
                     {s.icon}
                   </a>

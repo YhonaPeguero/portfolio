@@ -1,13 +1,14 @@
 import { ArrowUp, Github, Linkedin } from "lucide-react";
 import XIcon from "../ui/XIcon";
 import { profile } from "../../data/profile";
+import { socialBrand } from "../ui/socialBrand";
 import { useI18n } from "../../i18n/I18nProvider";
 
 const socials = [
-  { label: "GitHub", href: profile.socials.github, icon: <Github size={16} /> },
-  { label: "LinkedIn", href: profile.socials.linkedin, icon: <Linkedin size={16} /> },
-  { label: "X / Twitter", href: profile.socials.x, icon: <XIcon size={14} /> },
-];
+  { id: "github", label: "GitHub", href: profile.socials.github, icon: <Github size={16} /> },
+  { id: "linkedin", label: "LinkedIn", href: profile.socials.linkedin, icon: <Linkedin size={16} /> },
+  { id: "x", label: "X / Twitter", href: profile.socials.x, icon: <XIcon size={14} /> },
+] as const;
 
 export default function Footer() {
   const { t } = useI18n();
@@ -24,12 +25,12 @@ export default function Footer() {
         <div className="flex items-center gap-2">
           {socials.map((s) => (
             <a
-              key={s.label}
+              key={s.id}
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.label}
-              className="grid h-10 w-10 place-items-center border border-white/10 text-ink-muted transition-colors hover:border-cyan/50 hover:text-cyan"
+              className={`grid h-10 w-10 place-items-center border transition duration-200 ${socialBrand[s.id]}`}
             >
               {s.icon}
             </a>

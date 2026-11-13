@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, Send } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
 import XIcon from "../ui/XIcon";
 import { profile } from "../../data/profile";
+import { emailBrand, socialBrand } from "../ui/socialBrand";
 import { useI18n } from "../../i18n/I18nProvider";
 
 const socials = [
@@ -104,7 +105,7 @@ export default function Contact() {
       <div className="mt-8 flex items-center justify-center gap-4">
         <a
           href={`mailto:${profile.email}`}
-          className="grid h-12 w-12 place-items-center border border-white/10 text-ink-muted transition-all hover:border-cyan hover:text-cyan hover:shadow-neon-cyan"
+          className={`grid h-12 w-12 place-items-center border transition duration-200 ${emailBrand}`}
           aria-label={t.contact.email}
         >
           <Mail size={20} />
@@ -115,7 +116,7 @@ export default function Contact() {
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="grid h-12 w-12 place-items-center border border-white/10 text-ink-muted transition-all hover:border-cyan hover:text-cyan hover:shadow-neon-cyan"
+            className={`grid h-12 w-12 place-items-center border transition duration-200 ${socialBrand[s.id]}`}
             aria-label={s.label}
           >
             {s.icon}

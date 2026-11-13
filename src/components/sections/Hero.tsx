@@ -5,6 +5,7 @@ import GameButton from "../ui/GameButton";
 import XIcon from "../ui/XIcon";
 import CSSFallback from "../three/CSSFallback";
 import { profile } from "../../data/profile";
+import { socialBrand } from "../ui/socialBrand";
 import { isWebGLAvailable } from "../../lib/webgl";
 import { useMediaQuery, usePrefersReducedMotion, useScramble } from "../../lib/hooks";
 import { useCv, useI18n } from "../../i18n/I18nProvider";
@@ -16,10 +17,10 @@ const HeroScene = lazy(() => import("../three/HeroScene"));
 const HeroFigure = lazy(() => import("../three/HeroFigure"));
 
 const socials = [
-  { label: "GitHub", href: profile.socials.github, icon: <Github size={18} /> },
-  { label: "LinkedIn", href: profile.socials.linkedin, icon: <Linkedin size={18} /> },
-  { label: "X / Twitter", href: profile.socials.x, icon: <XIcon size={16} /> },
-];
+  { id: "github", label: "GitHub", href: profile.socials.github, icon: <Github size={18} /> },
+  { id: "linkedin", label: "LinkedIn", href: profile.socials.linkedin, icon: <Linkedin size={18} /> },
+  { id: "x", label: "X / Twitter", href: profile.socials.x, icon: <XIcon size={16} /> },
+] as const;
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -113,12 +114,12 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
             <span className="mr-1 font-mono text-[11px] tracking-[0.3em] text-ink-faint">{t.hero.findMe}</span>
             {socials.map((s) => (
               <a
-                key={s.label}
+                key={s.id}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="grid h-10 w-10 place-items-center border border-white/10 bg-void/40 text-ink-muted transition-colors hover:border-cyan/50 hover:text-cyan"
+                className={`grid h-10 w-10 place-items-center border bg-void/40 transition duration-200 ${socialBrand[s.id]}`}
               >
                 {s.icon}
               </a>

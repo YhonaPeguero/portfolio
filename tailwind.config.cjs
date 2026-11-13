@@ -28,6 +28,12 @@ module.exports = {
           muted: "#A8B4C0", // secondary text — ≈ 8.6:1 on void
           faint: "#7E8B99", // micro-labels — ≈ 5.7:1 on void (WCAG AA)
         },
+        // Social brand color (see src/components/ui/socialBrand.ts). GitHub
+        // and X are monochrome brands and use white on this dark page.
+        linkedin: {
+          DEFAULT: "#0A66C2", // official LinkedIn blue (frame, hover fill)
+          light: "#378FE9", // same blue, lifted so the icon reads on void
+        },
       },
       fontFamily: {
         display: ["Orbitron", "sans-serif"],
@@ -39,6 +45,8 @@ module.exports = {
         "neon-cyan": "0 0 8px rgba(0,245,255,0.6), 0 0 24px rgba(0,245,255,0.25)",
         "neon-magenta": "0 0 8px rgba(255,0,110,0.6), 0 0 24px rgba(255,0,110,0.25)",
         "neon-amber": "0 0 8px rgba(255,184,0,0.6), 0 0 24px rgba(255,184,0,0.25)",
+        "neon-white": "0 0 8px rgba(255,255,255,0.55), 0 0 24px rgba(255,255,255,0.2)",
+        "neon-linkedin": "0 0 8px rgba(10,102,194,0.9), 0 0 24px rgba(10,102,194,0.5)",
       },
       keyframes: {
         flicker: {
