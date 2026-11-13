@@ -1,4 +1,6 @@
 export interface SideQuest {
+  /** Stable key: translations in src/i18n/content are matched by it */
+  id: string;
   title: string;
   org: string;
   status: "COMPLETE" | "ACTIVE" | "ONGOING";
@@ -14,6 +16,7 @@ export interface SideQuest {
  */
 export const sideQuests: SideQuest[] = [
   {
+    id: "repulink",
     title: "RepuLink (Solana)",
     org: "Solana · Reputation",
     status: "COMPLETE",
@@ -21,6 +24,7 @@ export const sideQuests: SideQuest[] = [
       "On-chain reputation experiment on Solana — exploring verifiable identity & trust primitives in Web3.",
   },
   {
+    id: "binance-angel",
     title: "Binance Angel",
     org: "Binance · Web3",
     period: "2026",
@@ -29,6 +33,7 @@ export const sideQuests: SideQuest[] = [
       "Web3 technical-community role — designed educational content for builders and helped newcomers use the crypto ecosystem responsibly.",
   },
   {
+    id: "base-latam-ambassador",
     title: "Base LATAM Ambassador",
     org: "Coinbase · Base",
     period: "2025 — 2026",
@@ -37,6 +42,7 @@ export const sideQuests: SideQuest[] = [
       "Created technical & educational content to drive Web3 adoption across LATAM — accessible, practical onchain onboarding for the Base community.",
   },
   {
+    id: "hack-latam-2026",
     title: "Hack@LATAM 2026 — K-milla",
     org: "Hackathon · Civic Tech",
     status: "COMPLETE",
@@ -45,6 +51,7 @@ export const sideQuests: SideQuest[] = [
     link: "https://k-milla.vercel.app",
   },
   {
+    id: "standx-contributions",
     title: "StandX Community Contributions",
     org: "StandX · DeFi",
     status: "COMPLETE",

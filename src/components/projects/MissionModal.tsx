@@ -5,6 +5,7 @@ import TechChip from "../ui/TechChip";
 import { rankColor } from "./MissionCard";
 import { useLockScroll } from "../../lib/hooks";
 import type { Project } from "../../data/projects";
+import { useI18n } from "../../i18n/I18nProvider";
 
 interface MissionModalProps {
   project: Project;
@@ -31,6 +32,7 @@ export default function MissionModal({
   onPrev,
   onNext,
 }: MissionModalProps) {
+  const { t } = useI18n();
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
@@ -68,7 +70,7 @@ export default function MissionModal({
 
   const stack = (
     <>
-      <h4 className="mb-3 mt-6 font-mono text-[11px] tracking-[0.3em] text-ink-faint">STACK</h4>
+      <h4 className="mb-3 mt-6 font-mono text-[11px] tracking-[0.3em] text-ink-faint">{t.projects.stack}</h4>
       <div className="flex flex-wrap gap-1.5">
         {project.stack.map((t) => (
           <TechChip key={t} label={t} accent="cyan" />
@@ -102,7 +104,7 @@ export default function MissionModal({
         {/* Title bar */}
         <div className="flex shrink-0 items-center justify-between gap-3 border-b border-white/10 px-4 py-2.5 md:px-6">
           <p className="font-mono text-[11px] tracking-[0.25em] text-ink-faint">
-            <span className="text-cyan">{project.code}</span> // MISSION BRIEF{" "}
+            <span className="text-cyan">{project.code}</span> // {t.projects.missionBrief}{" "}
             <span className="hidden sm:inline">
               · {pad(position)}/{pad(total)}
             </span>
@@ -111,7 +113,7 @@ export default function MissionModal({
             <button
               type="button"
               onClick={onPrev}
-              aria-label="Previous project"
+              aria-label={t.projects.previous}
               className="grid h-9 w-9 place-items-center border border-white/10 text-ink-muted transition-colors hover:border-cyan/50 hover:text-cyan"
             >
               <ChevronLeft size={16} />
@@ -119,7 +121,7 @@ export default function MissionModal({
             <button
               type="button"
               onClick={onNext}
-              aria-label="Next project"
+              aria-label={t.projects.next}
               className="grid h-9 w-9 place-items-center border border-white/10 text-ink-muted transition-colors hover:border-cyan/50 hover:text-cyan"
             >
               <ChevronRight size={16} />
@@ -128,7 +130,7 @@ export default function MissionModal({
               ref={closeRef}
               type="button"
               onClick={onClose}
-              aria-label="Close project details"
+              aria-label={t.projects.close}
               className="ml-2 grid h-9 w-9 place-items-center border border-white/10 text-ink-muted transition-colors hover:border-magenta/60 hover:text-magenta"
             >
               <X size={16} />
@@ -144,7 +146,7 @@ export default function MissionModal({
               {project.cover && (
                 <img
                   src={project.cover}
-                  alt={`Screenshot of ${project.name}`}
+                  alt={t.projects.screenshotOf(project.name)}
                   width={784}
                   height={490}
                   className="absolute inset-0 h-full w-full object-cover object-left-top"
@@ -158,7 +160,7 @@ export default function MissionModal({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-cyan/60 px-4 py-2.5 font-mono text-xs font-bold tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
               >
-                <ExternalLink size={14} /> OPEN LIVE DEMO
+                <ExternalLink size={14} /> {t.projects.openLive}
               </a>
               {project.github && (
                 <a
@@ -167,7 +169,7 @@ export default function MissionModal({
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 border border-white/15 px-4 py-2.5 font-mono text-xs font-bold tracking-[0.15em] text-ink-muted transition-colors hover:border-white/40 hover:text-ink"
                 >
-                  <Github size={14} /> SOURCE CODE
+                  <Github size={14} /> {t.projects.sourceCode}
                 </a>
               )}
             </div>
@@ -189,7 +191,7 @@ export default function MissionModal({
               <span className="text-ink-faint">{project.classTag}</span>
               <span
                 className={`ml-auto grid h-7 w-7 place-items-center border font-display text-xs font-black ${rankColor[project.rank]}`}
-                title={`Rank ${project.rank}`}
+                title={t.projects.rank(project.rank)}
               >
                 {project.rank}
               </span>
@@ -200,17 +202,17 @@ export default function MissionModal({
             </h3>
             <p className="mt-3 font-ui text-base leading-relaxed text-ink-muted">{project.brief}</p>
 
-            <h4 className="mb-3 mt-6 font-mono text-[11px] tracking-[0.3em] text-amber">ACHIEVEMENTS</h4>
+            <h4 className="mb-3 mt-6 font-mono text-[11px] tracking-[0.3em] text-amber">{t.projects.achievements}</h4>
             <ul className="space-y-2.5">
-              {project.achievements.map((a) => (
-                <li key={a} className="flex gap-2.5 font-ui text-sm leading-relaxed text-ink">
+              {project.achievements.map((a, i) => (
+                <li key={i} className="flex gap-2.5 font-ui text-sm leading-relaxed text-ink">
                   <Trophy size={14} className="mt-1 shrink-0 text-amber" />
                   <span>{a}</span>
                 </li>
               ))}
             </ul>
 
-            <h4 className="mb-2 mt-6 font-mono text-[11px] tracking-[0.3em] text-cyan">IMPACT</h4>
+            <h4 className="mb-2 mt-6 font-mono text-[11px] tracking-[0.3em] text-cyan">{t.projects.impact}</h4>
             <p className="flex gap-2.5 font-mono text-[13px] leading-relaxed text-cyan/90">
               <Target size={14} className="mt-1 shrink-0" />
               <span>{project.impact}</span>

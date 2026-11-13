@@ -2,18 +2,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronRight, GraduationCap, Award } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
-import {
-  experience,
-  education,
-  certifications,
-  languages,
-  type ExperienceRole,
-} from "../../data/experience";
+import type { ExperienceRole } from "../../data/experience";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const VISIBLE = 3; // roles shown before "See more"
 const HL_VISIBLE = 2; // highlights shown before "Read more"
 
 function RoleCard({ node, index }: { node: ExperienceRole; index: number }) {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const hasMore = node.highlights.length > HL_VISIBLE;
   const shown = open ? node.highlights : node.highlights.slice(0, HL_VISIBLE);
@@ -52,7 +48,7 @@ function RoleCard({ node, index }: { node: ExperienceRole; index: number }) {
                 node.current ? "border-amber/60 text-amber" : "border-white/15 text-ink-faint"
               }`}
             >
-              {node.current ? "CURRENT" : node.type}
+              {node.current ? t.experience.current : node.type}
             </span>
           </div>
         </div>
@@ -60,8 +56,8 @@ function RoleCard({ node, index }: { node: ExperienceRole; index: number }) {
         <p className="mb-3 font-ui text-sm leading-relaxed text-ink-muted">{node.summary}</p>
 
         <ul className="space-y-1.5">
-          {shown.map((h) => (
-            <li key={h} className="flex items-start gap-2 font-ui text-sm leading-relaxed text-ink">
+          {shown.map((h, i) => (
+            <li key={i} className="flex items-start gap-2 font-ui text-sm leading-relaxed text-ink">
               <ChevronRight size={15} className="mt-0.5 shrink-0 text-amber" />
               <span>{h}</span>
             </li>
@@ -74,7 +70,7 @@ function RoleCard({ node, index }: { node: ExperienceRole; index: number }) {
             aria-expanded={open}
             className="-mb-1.5 mt-1.5 inline-flex items-center gap-1 py-1.5 font-mono text-[12px] font-medium tracking-wider text-cyan/80 transition-colors hover:text-cyan"
           >
-            {open ? "Read less" : `Read more (+${node.highlights.length - HL_VISIBLE})`}
+            {open ? t.experience.readLess : t.experience.readMore(node.highlights.length - HL_VISIBLE)}
             <ChevronDown
               size={13}
               className={`transition-transform ${open ? "rotate-180" : ""}`}
@@ -87,6 +83,8 @@ function RoleCard({ node, index }: { node: ExperienceRole; index: number }) {
 }
 
 export default function Experience() {
+  const { t, content } = useI18n();
+  const { experience, education, certifications, languages } = content;
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? experience : experience.slice(0, VISIBLE);
   const remaining = experience.length - VISIBLE;
@@ -95,16 +93,16 @@ export default function Experience() {
     <section id="experience" className="relative mx-auto max-w-5xl px-5 py-24 md:py-32">
       <SectionHeading
         index="04"
-        title="CHARACTER STATS"
+        title={t.experience.title}
         kanji="経歴"
         accent="amber"
-        subtitle="Real roles, real dates, real outcomes — most recent first."
+        subtitle={t.experience.subtitle}
       />
 
       {/* Work timeline */}
       <ol className="relative space-y-6 border-l border-white/10 pl-6 md:pl-8">
         {visible.map((node, i) => (
-          <RoleCard key={node.role + node.period} node={node} index={i} />
+          <RoleCard key={node.id} node={node} index={i} />
         ))}
       </ol>
 
@@ -116,7 +114,7 @@ export default function Experience() {
             aria-expanded={showAll}
             className="hud-corners group relative inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
           >
-            {showAll ? "See less" : `See ${remaining} more roles`}
+            {showAll ? t.common.seeLess : t.experience.seeMore(remaining)}
             <ChevronDown
               size={14}
               className={`transition-transform ${showAll ? "rotate-180" : ""}`}
@@ -136,12 +134,12 @@ export default function Experience() {
         {/* Education */}
         <div>
           <h3 className="mb-4 flex items-center gap-2 font-mono text-sm tracking-[0.25em] text-cyan">
-            <GraduationCap size={16} /> EDUCATION
+            <GraduationCap size={16} /> {t.experience.education}
           </h3>
           <div className="space-y-3">
             {education.map((c) => (
               <div
-                key={c.title}
+                key={c.org}
                 className="hud-panel flex items-center justify-between gap-3 px-4 py-3"
               >
                 <div>
@@ -157,7 +155,7 @@ export default function Experience() {
         {/* Certifications + languages */}
         <div>
           <h3 className="mb-4 flex items-center gap-2 font-mono text-sm tracking-[0.25em] text-magenta">
-            <Award size={16} /> CERTIFICATIONS
+            <Award size={16} /> {t.experience.certifications}
           </h3>
           <ul className="mb-6 space-y-2">
             {certifications.map((c) => (
@@ -171,11 +169,11 @@ export default function Experience() {
             ))}
           </ul>
 
-          <h3 className="mb-3 font-mono text-sm tracking-[0.25em] text-amber">LANGUAGES</h3>
+          <h3 className="mb-3 font-mono text-sm tracking-[0.25em] text-amber">{t.experience.languages}</h3>
           <div className="flex flex-wrap gap-2">
-            {languages.map((l) => (
+            {languages.map((l, i) => (
               <span
-                key={l}
+                key={i}
                 className="border border-amber/40 bg-amber/[0.04] px-3 py-1 font-mono text-xs tracking-wider text-amber"
               >
                 {l}

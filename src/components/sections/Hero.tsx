@@ -7,6 +7,7 @@ import CSSFallback from "../three/CSSFallback";
 import { profile } from "../../data/profile";
 import { isWebGLAvailable } from "../../lib/webgl";
 import { useMediaQuery, usePrefersReducedMotion, useScramble } from "../../lib/hooks";
+import { useCv, useI18n } from "../../i18n/I18nProvider";
 
 // Heavy 3D scene is code-split and only loaded when WebGL is present.
 const HeroScene = lazy(() => import("../three/HeroScene"));
@@ -25,6 +26,9 @@ function scrollTo(id: string) {
 }
 
 export default function Hero({ ready = true }: { ready?: boolean }) {
+  const { t, content } = useI18n();
+  const cv = useCv();
+  const { roles, tagline } = content.profile;
   const reduced = usePrefersReducedMotion();
   const webgl = useMemo(() => isWebGLAvailable(), []);
   // Figure only appears where there's real room beside the text (xl+).
@@ -57,13 +61,13 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
           {/* Status line */}
           <p className="mb-4 inline-flex items-center gap-2 border border-cyan/30 bg-cyan/[0.04] px-3 py-1 font-mono text-[11px] tracking-[0.25em] text-cyan">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan shadow-neon-cyan" />
-            SYSTEM ONLINE // READY
+            {t.hero.status}
           </p>
 
           {/* Kanji + canonical title (single source — no duplicate below) */}
           <p className="mb-3 font-mono text-sm tracking-[0.3em] text-magenta">
             <span className="font-jp mr-2">{profile.kanji}</span>
-            // {profile.roles[0].toUpperCase()}
+            // {roles[0].toUpperCase()}
           </p>
 
           {/* Name (scramble-in) */}
@@ -73,7 +77,7 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
 
           {/* Specialties (title already shown above, so skip roles[0]) */}
           <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 font-ui text-lg text-ink-muted md:text-2xl">
-            {profile.roles.slice(1).map((r, i) => (
+            {roles.slice(1).map((r, i) => (
               <span key={r} className="flex items-center gap-3">
                 {i > 0 && <span className="text-cyan/50">·</span>}
                 <span className={i === 0 ? "text-magenta" : "text-amber"}>{r}</span>
@@ -82,24 +86,31 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
           </p>
 
           <p className="mt-5 max-w-xl font-ui text-base leading-relaxed text-ink-muted">
-            {profile.tagline}
+            {tagline}
           </p>
 
           {/* CTAs */}
           <div className="mt-9 flex flex-wrap gap-4">
             <GameButton onClick={() => scrollTo("projects")} variant="primary">
-              ENTER PORTFOLIO
+              {t.hero.enter}
               <ArrowRight size={16} />
             </GameButton>
-            <GameButton href={profile.cv} download="Yhonatan_Peguero_CV.pdf" variant="ghost" external>
-              DOWNLOAD CV
+            <GameButton
+              href={cv.href}
+              download={cv.fileName}
+              hrefLang={cv.language}
+              description={cv.description}
+              variant="ghost"
+              external
+            >
+              {cv.label}
               <Download size={16} />
             </GameButton>
           </div>
 
           {/* Socials */}
           <div className="mt-6 flex items-center gap-2">
-            <span className="mr-1 font-mono text-[11px] tracking-[0.3em] text-ink-faint">FIND ME</span>
+            <span className="mr-1 font-mono text-[11px] tracking-[0.3em] text-ink-faint">{t.hero.findMe}</span>
             {socials.map((s) => (
               <a
                 key={s.label}
@@ -142,7 +153,7 @@ export default function Hero({ ready = true }: { ready?: boolean }) {
       <button
         onClick={() => scrollTo("skills")}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cyan/70 hover:text-cyan [@media(max-height:680px)]:hidden"
-        aria-label="Scroll to next section"
+        aria-label={t.hero.scrollNext}
       >
         <ChevronDown className="animate-float" />
       </button>

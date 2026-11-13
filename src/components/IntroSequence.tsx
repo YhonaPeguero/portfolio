@@ -4,12 +4,14 @@ import HoloFigure from "./three/HoloFigure";
 import Particles from "./three/Particles";
 import { profile } from "../data/profile";
 import { usePrefersReducedMotion, useMediaQuery, useTypewriter } from "../lib/hooks";
+import { useI18n } from "../i18n/I18nProvider";
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
 /** Small "typing" line — what the operator is typing on the console. */
 function TypingLine() {
-  const { text, done } = useTypewriter("> initializing operator…", 30);
+  const { t } = useI18n();
+  const { text, done } = useTypewriter(t.intro.typing, 30);
   return (
     <span className="font-mono text-xs tracking-wider text-cyan/80 sm:text-sm">
       {text}
@@ -30,6 +32,7 @@ function TypingLine() {
  * Asset is swappable in HoloFigure (PNG/WebP/SVG…).
  */
 export default function IntroSequence({ onComplete }: { onComplete: () => void }) {
+  const { t } = useI18n();
   const reduced = usePrefersReducedMotion();
   const isWide = useMediaQuery("(min-width: 1280px)");
   const [phase, setPhase] = useState<"type" | "move">("type");
@@ -68,7 +71,7 @@ export default function IntroSequence({ onComplete }: { onComplete: () => void }
       className="fixed inset-0 z-[100] cursor-pointer overflow-hidden"
       onClick={onComplete}
       role="status"
-      aria-label="Intro — booting portfolio"
+      aria-label={t.intro.label}
       exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
     >
       {/* Opaque backdrop (void + perspective grid + neon glows) — dissolves
@@ -130,7 +133,7 @@ export default function IntroSequence({ onComplete }: { onComplete: () => void }
         onClick={onComplete}
         className="absolute bottom-5 right-5 font-mono text-[11px] tracking-widest text-ink-faint hover:text-cyan"
       >
-        [ SKIP ]
+        {t.intro.skip}
       </button>
     </motion.div>
   );

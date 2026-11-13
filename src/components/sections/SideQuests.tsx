@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ExternalLink } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
-import { sideQuests } from "../../data/sideQuests";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const statusStyle = {
   COMPLETE: "border-cyan/50 text-cyan",
@@ -13,6 +13,8 @@ const statusStyle = {
 const VISIBLE = 3; // shown before "See more"
 
 export default function SideQuests() {
+  const { t, content } = useI18n();
+  const { sideQuests } = content;
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? sideQuests : sideQuests.slice(0, VISIBLE);
   const remaining = sideQuests.length - VISIBLE;
@@ -21,16 +23,16 @@ export default function SideQuests() {
     <section id="sidequests" className="relative mx-auto max-w-7xl px-5 py-24 md:py-32">
       <SectionHeading
         index="03"
-        title="SIDE QUESTS"
+        title={t.sideQuests.title}
         kanji="依頼"
         accent="cyan"
-        subtitle="Web3 & open-source activity — hackathons, DeFi contributions and on-chain experiments."
+        subtitle={t.sideQuests.subtitle}
       />
 
       <div className="grid gap-4 md:grid-cols-2">
         {visible.map((q, i) => (
           <motion.div
-            key={q.title}
+            key={q.id}
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -46,7 +48,7 @@ export default function SideQuests() {
                 <span
                   className={`border px-2 py-0.5 font-mono text-[11px] tracking-wider ${statusStyle[q.status]}`}
                 >
-                  {q.status}
+                  {t.sideQuests.status[q.status]}
                 </span>
               </div>
               <p className="font-mono text-[11px] tracking-wider text-ink-faint">
@@ -61,7 +63,7 @@ export default function SideQuests() {
                   rel="noopener noreferrer"
                   className="-mb-1.5 mt-0.5 inline-flex items-center gap-1.5 py-1.5 font-mono text-xs text-cyan hover:text-glow-cyan"
                 >
-                  <ExternalLink size={13} /> VIEW
+                  <ExternalLink size={13} /> {t.sideQuests.view}
                 </a>
               )}
             </div>
@@ -76,7 +78,7 @@ export default function SideQuests() {
             aria-expanded={showAll}
             className="hud-corners group relative inline-flex items-center gap-2 border border-cyan/40 px-5 py-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-cyan transition-colors hover:bg-cyan hover:text-void"
           >
-            {showAll ? "See less" : `See ${remaining} more quests`}
+            {showAll ? t.common.seeLess : t.sideQuests.seeMore(remaining)}
             <ChevronDown
               size={14}
               className={`transition-transform ${showAll ? "rotate-180" : ""}`}

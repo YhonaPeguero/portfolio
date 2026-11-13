@@ -62,6 +62,7 @@ staying fast, accessible and recruiter-friendly.
 ```
 src/
   data/         # profile, projects, skills, experience, side quests, dialogue
+  i18n/         # EN / ES: locale registry, UI dictionaries, content translations
   lib/          # webgl detection + hooks (reduced-motion, active section, typewriter, scramble)
   components/
     fx/         # CRT scanline / grain / vignette overlays
@@ -105,6 +106,34 @@ Everything is data-driven — edit the files in `src/data/` to update copy:
   which drives the WEB2 / WEB3 tabs; copy an entry to add a project.
 - `skills.ts` / `experience.ts` / `sideQuests.ts` — section content.
 - `companionInfo.ts` — the topics/answers PIXL surfaces about you.
+
+### Languages (EN / ES)
+
+English is the source and the default (`/`); Spanish lives at `/es/`. No i18n
+library: a typed dictionary plus content overlays in `src/i18n/`.
+
+- `site.json`: site URL, default language and, per language, its name and the
+  page metadata (title, description, Open Graph). The build reads it to emit one
+  static HTML per language with canonical + `hreflang`, plus `sitemap.xml`.
+- `dictionaries/en.ts` + `es.ts`: interface copy. `es.ts` is typed against
+  `en.ts`, so a missing key fails `npm run typecheck`.
+- `content/es.ts`: Spanish text for `src/data`, matched by stable id (project
+  `code`, everything else `id`). It only carries text: links, images, tags and
+  order always come from `src/data`. A field left out falls back to English.
+
+When you edit copy in `src/data`, update the same id in `content/es.ts`. To add
+a language: add it to `site.json`, then a dictionary and a content overlay.
+
+**CV:** only the English PDF exists, so in Spanish the button reads
+`DESCARGAR CV (EN)` and links the English file. To add a Spanish CV, drop the
+PDF in `src/assets/` and register it in `cvFiles` (`src/data/profile.ts`):
+
+```ts
+import cvFileEs from "../assets/Yhonatan Peguero-CV-ES.pdf";
+export const cvFiles = { en: cvFile, es: cvFileEs };
+```
+
+The Spanish button then switches to `DESCARGAR CV` and the new file on its own.
 
 ### Hero figure asset
 

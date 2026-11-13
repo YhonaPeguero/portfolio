@@ -150,8 +150,9 @@ export default function HeroFigure({ ready = false }: { ready?: boolean }) {
         </div>
       </div>
 
-      {/* AI-agent nodes + connectors */}
-      <div className="hf-nodes pointer-events-none absolute inset-0">
+      {/* AI-agent nodes + connectors. Ambient HUD chrome, not content: kept
+          as fixed system labels and hidden from assistive tech. */}
+      <div className="hf-nodes pointer-events-none absolute inset-0" aria-hidden="true">
         <svg
           className="absolute inset-0 h-full w-full"
           viewBox="0 0 100 100"

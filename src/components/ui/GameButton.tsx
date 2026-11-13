@@ -9,6 +9,10 @@ interface GameButtonProps {
   download?: string;
   external?: boolean;
   className?: string;
+  /** Tooltip and accessible name, when the visible label needs explaining */
+  description?: string;
+  /** Language of the linked file, when it differs from the page */
+  hrefLang?: string;
 }
 
 /**
@@ -23,6 +27,8 @@ export default function GameButton({
   download,
   external,
   className = "",
+  description,
+  hrefLang,
 }: GameButtonProps) {
   const base =
     "hud-corners group relative inline-flex items-center justify-center gap-2 px-7 py-3 font-mono text-sm font-bold uppercase tracking-[0.15em] transition-colors duration-200 focus-visible:outline-cyan";
@@ -52,6 +58,9 @@ export default function GameButton({
         href={href}
         onClick={onClick}
         download={download}
+        hrefLang={hrefLang}
+        title={description}
+        aria-label={description}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
         className={`${base} ${styles} ${glow} ${className}`}

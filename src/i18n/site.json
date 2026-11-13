@@ -1,0 +1,20 @@
+{
+  "url": "https://yhonatanpeguero.com",
+  "defaultLocale": "en",
+  "locales": {
+    "en": {
+      "name": "English",
+      "ogLocale": "en_US",
+      "title": "YHONATAN_OS // Senior Software Engineer",
+      "description": "Yhonatan Peguero — Senior Software Engineer, Web3 Builder & DeFi Contributor. A next-gen interactive portfolio.",
+      "ogDescription": "Senior Software Engineer · Web3 Builder · DeFi Contributor. Boot the portfolio."
+    },
+    "es": {
+      "name": "Español",
+      "ogLocale": "es_LA",
+      "title": "YHONATAN_OS // Ingeniero de Software Senior",
+      "description": "Yhonatan Peguero: Ingeniero de Software Senior, builder en Web3 y contribuidor en DeFi. Un portafolio interactivo de nueva generación.",
+      "ogDescription": "Ingeniero de Software Senior · Builder Web3 · Contribuidor DeFi. Inicia el portafolio."
+    }
+  }
+}

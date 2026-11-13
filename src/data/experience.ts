@@ -1,4 +1,6 @@
 export interface ExperienceRole {
+  /** Stable key: translations in src/i18n/content are matched by it */
+  id: string;
   role: string;
   org: string;
   /** Human-readable date range (clear meaning — replaces arbitrary "levels") */
@@ -21,6 +23,7 @@ export interface ExperienceRole {
  */
 export const experience: ExperienceRole[] = [
   {
+    id: "claro-rd",
     role: "Software Developer",
     org: "Claro RD",
     period: "Jan 2023 — Present",
@@ -37,6 +40,7 @@ export const experience: ExperienceRole[] = [
     ],
   },
   {
+    id: "blackcode",
     role: "Frontend Web Developer",
     org: "BlackCode",
     period: "Feb — Nov 2024",
@@ -51,6 +55,7 @@ export const experience: ExperienceRole[] = [
     ],
   },
   {
+    id: "openbootcamp",
     role: "FullStack Developer",
     org: "OpenBootcamp",
     period: "Aug 2022 — May 2023",
@@ -64,6 +69,7 @@ export const experience: ExperienceRole[] = [
     ],
   },
   {
+    id: "boyants",
     role: "Fullstack Developer",
     org: "Boyants",
     period: "Jun — Dec 2022",
@@ -78,6 +84,7 @@ export const experience: ExperienceRole[] = [
     ],
   },
   {
+    id: "oracle-one",
     role: "Web Developer Bootcamp (ONE)",
     org: "Oracle Next Education",
     period: "Nov 2021 — Jul 2022",
@@ -91,6 +98,7 @@ export const experience: ExperienceRole[] = [
     ],
   },
   {
+    id: "bamapit",
     role: "Front-End Analyst (Intern)",
     org: "Bamapit Agrosoft",
     period: "Jan 2021 — Jan 2022",

@@ -27,12 +27,14 @@ import Experience from "./components/sections/Experience";
 import SideQuests from "./components/sections/SideQuests";
 import Contact from "./components/sections/Contact";
 import { useActiveSection } from "./lib/hooks";
+import { useI18n } from "./i18n/I18nProvider";
 
 const SECTION_IDS = ["home", "skills", "projects", "sidequests", "experience", "contact"];
 
 export default function App() {
   const active = useActiveSection(SECTION_IDS);
   const [booting, setBooting] = useState(true);
+  const { t } = useI18n();
 
   return (
     <div className="relative min-h-screen bg-void text-ink">
@@ -46,7 +48,7 @@ export default function App() {
         href="#projects"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:bg-cyan focus:px-4 focus:py-2 focus:font-mono focus:text-void"
       >
-        Skip to projects
+        {t.a11y.skipToProjects}
       </a>
 
       <Overlays />

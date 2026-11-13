@@ -1,6 +1,7 @@
 // Background-keyed (transparent) version of avatar-pj2.png — see
 // scripts/cut-avatar.cjs (the original export was flattened onto a light bg).
 import avatar from "../../assets/avatar-pj2-cut.png";
+import { useI18n } from "../../i18n/I18nProvider";
 
 /**
  * The central holographic operator — a transparent PNG cutout of Yhonatan as a
@@ -15,10 +16,11 @@ const GLOW =
   "drop-shadow(0 0 20px rgba(40,150,255,0.5)) drop-shadow(0 0 52px rgba(20,110,255,0.28))";
 
 export default function HoloFigure({ className = "" }: { className?: string }) {
+  const { t } = useI18n();
   return (
     <img
       src={avatar}
-      alt="Yhonatan as a holographic hooded developer"
+      alt={t.hero.figureAlt}
       draggable={false}
       style={{ filter: GLOW }}
       className={`holo-soft h-full w-full object-contain ${className}`}

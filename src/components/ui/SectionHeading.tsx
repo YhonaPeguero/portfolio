@@ -34,9 +34,12 @@ export default function SectionHeading({
       <div className={`mb-2 font-mono text-xs tracking-[0.4em] ${a.text}`}>
         [ SECTOR_{index} ]
       </div>
-      <div className="flex items-end gap-4">
+      {/* Below 360px the title scales with the viewport (it is exactly text-3xl
+          from 360px up), so one long word, common in Spanish, still fits
+          beside the kanji. */}
+      <div className="flex items-end gap-3 min-[360px]:gap-4">
         <h2
-          className={`glitch text-3xl font-black uppercase tracking-wider text-ink md:text-5xl`}
+          className={`glitch text-[length:clamp(1.5rem,8.34vw,1.875rem)] font-black uppercase leading-9 tracking-wider text-ink md:text-5xl`}
           data-text={title}
         >
           {title}

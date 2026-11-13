@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github, Maximize2, Target } from "lucide-react";
 import TechChip from "../ui/TechChip";
 import type { Project } from "../../data/projects";
+import { useI18n } from "../../i18n/I18nProvider";
 
 export const rankColor: Record<Project["rank"], string> = {
   S: "border-amber text-amber shadow-neon-amber",
@@ -38,6 +39,7 @@ export default function MissionCard({
   tabletWide = false,
   onOpen,
 }: MissionCardProps) {
+  const { t } = useI18n();
   const feature = size === "feature";
 
   // Flagship brief reads "Credential: what it is." — show the credential as a
@@ -73,13 +75,13 @@ export default function MissionCard({
       <button
         type="button"
         onClick={(e) => onOpen(e.currentTarget)}
-        aria-label={`Open ${project.name} details`}
+        aria-label={t.projects.openDetails(project.name)}
         className={`relative block w-full shrink-0 overflow-hidden border-b border-white/10 bg-void-700 ${shot}`}
       >
         {project.cover && (
           <img
             src={project.cover}
-            alt={`Screenshot of ${project.name}`}
+            alt={t.projects.screenshotOf(project.name)}
             width={784}
             height={490}
             loading="lazy"
@@ -97,7 +99,7 @@ export default function MissionCard({
           {project.code}
         </span>
         <span className="absolute bottom-3 right-3 flex items-center gap-1.5 border border-cyan/50 bg-void/85 px-2.5 py-1 font-mono text-[11px] font-bold tracking-[0.15em] text-cyan opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
-          <Maximize2 size={12} /> VIEW INTEL
+          <Maximize2 size={12} /> {t.projects.viewIntel}
         </span>
       </button>
 
@@ -116,7 +118,7 @@ export default function MissionCard({
           <span className="text-ink-faint">{project.classTag}</span>
           <span
             className={`ml-auto grid h-7 w-7 shrink-0 place-items-center border font-display text-xs font-black ${rankColor[project.rank]}`}
-            title={`Rank ${project.rank}`}
+            title={t.projects.rank(project.rank)}
           >
             {project.rank}
           </span>
@@ -175,7 +177,7 @@ export default function MissionCard({
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 border border-cyan/60 px-3 py-2 font-mono text-[11px] font-bold tracking-[0.12em] text-cyan transition-colors hover:bg-cyan hover:text-void"
           >
-            <ExternalLink size={13} /> LIVE
+            <ExternalLink size={13} /> {t.projects.live}
           </a>
           {project.github && (
             <a
@@ -184,7 +186,7 @@ export default function MissionCard({
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 border border-white/15 px-3 py-2 font-mono text-[11px] font-bold tracking-[0.12em] text-ink-muted transition-colors hover:border-white/40 hover:text-ink"
             >
-              <Github size={13} /> CODE
+              <Github size={13} /> {t.projects.code}
             </a>
           )}
           <button
@@ -192,7 +194,7 @@ export default function MissionCard({
             onClick={(e) => onOpen(e.currentTarget)}
             className="ml-auto inline-flex items-center gap-1 py-2 font-mono text-[11px] font-bold tracking-[0.12em] text-ink-muted transition-colors hover:text-cyan"
           >
-            INTEL <span aria-hidden="true">▸</span>
+            {t.projects.intel} <span aria-hidden="true">▸</span>
           </button>
         </div>
       </div>

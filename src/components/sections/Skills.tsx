@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import SectionHeading from "../ui/SectionHeading";
-import { skillCategories } from "../../data/skills";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const barColor = {
   cyan: "from-cyan/70 to-cyan",
@@ -14,18 +14,19 @@ const textColor = {
 };
 
 export default function Skills() {
+  const { t, content } = useI18n();
   return (
     <section id="skills" className="relative mx-auto max-w-7xl px-5 py-24 md:py-32">
       <SectionHeading
         index="01"
-        title="TECH ARSENAL"
+        title={t.skills.title}
         kanji="技"
         accent="cyan"
-        subtitle="Equipped skill nodes. Bars show current proficiency — frontend is maxed, on-chain is leveling fast."
+        subtitle={t.skills.subtitle}
       />
 
       <div className="grid gap-5 md:grid-cols-2">
-        {skillCategories.map((cat, ci) => (
+        {content.skillCategories.map((cat, ci) => (
           <motion.div
             key={cat.id}
             initial={{ opacity: 0, y: 30 }}
@@ -45,7 +46,7 @@ export default function Skills() {
 
             <ul className="space-y-3.5">
               {cat.skills.map((skill, si) => (
-                <li key={skill.name}>
+                <li key={si}>
                   <div className="mb-1 flex items-center justify-between font-mono text-xs">
                     <span className="text-ink">{skill.name}</span>
                     <span className={textColor[cat.accent]}>{skill.level}</span>

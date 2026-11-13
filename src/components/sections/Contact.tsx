@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, Send } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
 import XIcon from "../ui/XIcon";
 import { profile } from "../../data/profile";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const socials = [
   { id: "github", label: "GitHub", href: profile.socials.github, icon: <Github size={20} /> },
@@ -12,6 +13,7 @@ const socials = [
 ] as const;
 
 export default function Contact() {
+  const { t } = useI18n();
   const [name, setName] = useState("");
   const [from, setFrom] = useState("");
   const [message, setMessage] = useState("");
@@ -19,8 +21,8 @@ export default function Contact() {
   function submit(e: FormEvent) {
     e.preventDefault();
     // No backend required (Vercel-friendly): compose a mailto.
-    const subject = encodeURIComponent(`[PORTFOLIO] New transmission from ${name || "anon"}`);
-    const body = encodeURIComponent(`${message}\n\n— ${name}\nReply to: ${from}`);
+    const subject = encodeURIComponent(t.contact.mailSubject(name));
+    const body = encodeURIComponent(t.contact.mailBody(message, name, from));
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
   }
 
@@ -28,10 +30,10 @@ export default function Contact() {
     <section id="contact" className="relative mx-auto max-w-4xl px-5 py-24 md:py-32">
       <SectionHeading
         index="05"
-        title="INITIATE CONNECTION"
+        title={t.contact.title}
         kanji="接続"
         accent="magenta"
-        subtitle="Open to senior software engineering & Web3 roles, collabs and good problems. Drop a transmission."
+        subtitle={t.contact.subtitle}
       />
 
       <motion.form
@@ -52,39 +54,39 @@ export default function Contact() {
 
         <div className="space-y-4">
           <label className="block">
-            <span className="text-cyan">{"> NAME:"}</span>
+            <span className="text-cyan">{t.contact.name}</span>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
               className="mt-1 w-full border border-white/10 bg-black/40 px-3 py-2 text-ink outline-none focus:border-cyan"
-              placeholder="your_name"
+              placeholder={t.contact.namePlaceholder}
               autoComplete="name"
             />
           </label>
 
           <label className="block">
-            <span className="text-cyan">{"> REPLY_ADDR:"}</span>
+            <span className="text-cyan">{t.contact.replyTo}</span>
             <input
               type="email"
               value={from}
               onChange={(e) => setFrom(e.target.value)}
               required
               className="mt-1 w-full border border-white/10 bg-black/40 px-3 py-2 text-ink outline-none focus:border-cyan"
-              placeholder="you@domain.com"
+              placeholder={t.contact.emailPlaceholder}
               autoComplete="email"
             />
           </label>
 
           <label className="block">
-            <span className="text-cyan">{"> MESSAGE:"}</span>
+            <span className="text-cyan">{t.contact.message}</span>
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
               rows={4}
               className="mt-1 w-full resize-none border border-white/10 bg-black/40 px-3 py-2 text-ink outline-none focus:border-cyan"
-              placeholder="type your transmission..."
+              placeholder={t.contact.messagePlaceholder}
             />
           </label>
 
@@ -92,7 +94,7 @@ export default function Contact() {
             type="submit"
             className="hud-corners group relative inline-flex items-center gap-2 border border-magenta/60 px-6 py-2.5 font-bold uppercase tracking-[0.15em] text-magenta transition-colors hover:bg-magenta hover:text-void hover:shadow-neon-magenta"
           >
-            TRANSMIT
+            {t.contact.send}
             <Send size={15} className="transition-transform group-hover:translate-x-0.5" />
           </button>
         </div>
@@ -103,7 +105,7 @@ export default function Contact() {
         <a
           href={`mailto:${profile.email}`}
           className="grid h-12 w-12 place-items-center border border-white/10 text-ink-muted transition-all hover:border-cyan hover:text-cyan hover:shadow-neon-cyan"
-          aria-label="Email"
+          aria-label={t.contact.email}
         >
           <Mail size={20} />
         </a>
