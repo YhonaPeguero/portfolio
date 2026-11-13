@@ -130,7 +130,7 @@ export const en = {
   companion: {
     dialogLabel: "PIXL — information about Yhonatan",
     close: "Close",
-    unit: "PIXL // GUIDE_UNIT",
+    unit: "GUIDE_UNIT",
     online: "ONLINE",
     topics: "TOPICS",
     /** The greeting wraps the highlighted name: before + "PIXL" + after */
@@ -140,6 +140,22 @@ export const en = {
     closeTitle: "Close PIXL",
     openLabel: "Open PIXL — info about Yhonatan",
     closeLabel: "Close PIXL guide",
+    restart: "Restart conversation",
+    logLabel: "Conversation with PIXL",
+    /** Screen-reader speaker labels for the conversation log */
+    youAsked: "You asked:",
+    pixlSays: "PIXL:",
+    /** Screen-reader suffix on topics already asked */
+    seen: "seen",
+    /** Follow-up buttons under answers, keyed by section id */
+    actions: {
+      skills: "VIEW SKILLS",
+      projects: "VIEW PROJECTS",
+      sidequests: "VIEW WEB3",
+      experience: "VIEW EXPERIENCE",
+      contact: "GO TO CONTACT",
+      email: "SEND EMAIL",
+    },
   },
 };
 

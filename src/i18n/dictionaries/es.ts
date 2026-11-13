@@ -127,7 +127,7 @@ export const es: Dictionary = {
   companion: {
     dialogLabel: "PIXL: información sobre Yhonatan",
     close: "Cerrar",
-    unit: "PIXL // UNIDAD_GUÍA",
+    unit: "UNIDAD_GUÍA",
     online: "EN LÍNEA",
     topics: "TEMAS",
     greetingBefore: "¡Konnichiwa! Soy ",
@@ -136,5 +136,18 @@ export const es: Dictionary = {
     closeTitle: "Cerrar PIXL",
     openLabel: "Abrir PIXL: información sobre Yhonatan",
     closeLabel: "Cerrar la guía PIXL",
+    restart: "Reiniciar conversación",
+    logLabel: "Conversación con PIXL",
+    youAsked: "Preguntaste:",
+    pixlSays: "PIXL:",
+    seen: "visto",
+    actions: {
+      skills: "VER HABILIDADES",
+      projects: "VER PROYECTOS",
+      sidequests: "VER WEB3",
+      experience: "VER EXPERIENCIA",
+      contact: "IR A CONTACTO",
+      email: "ENVIAR EMAIL",
+    },
   },
 };

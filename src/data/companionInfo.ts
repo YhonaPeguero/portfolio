@@ -1,5 +1,11 @@
 import { profile } from "./profile";
 
+/** Where an answer can take the visitor next. Text comes from the dictionary. */
+export type TopicAction =
+  | { kind: "section"; target: "skills" | "projects" | "sidequests" | "experience" | "contact" }
+  | { kind: "cv" }
+  | { kind: "email" };
+
 export interface InfoTopic {
   id: string;
   /** Chip label */
@@ -8,6 +14,8 @@ export interface InfoTopic {
   question: string;
   /** Pre-written answer (no AI/API) */
   answer: string;
+  /** Follow-up buttons shown under the answer */
+  actions?: TopicAction[];
 }
 
 /**
@@ -21,6 +29,7 @@ export const infoTopics: InfoTopic[] = [
     question: "Who is Yhonatan?",
     answer:
       "Yhonatan Peguero — a Senior Software Engineer based in the Dominican Republic with 5+ years building product-driven web apps. He works at the intersection of UX, performance and architecture, and is also a Web3 builder & DeFi contributor.",
+    actions: [{ kind: "cv" }],
   },
   {
     id: "stack",
@@ -28,6 +37,7 @@ export const infoTopics: InfoTopic[] = [
     question: "What does he build with?",
     answer:
       "Frontend: React, Next.js, TypeScript, Tailwind, Framer Motion & Three.js. Web3: Solana/Rust, EVM/Base, viem/wagmi. Backend & infra: Node.js, PostgreSQL, Vercel/Edge and AI/LLM integration.",
+    actions: [{ kind: "section", target: "skills" }],
   },
   {
     id: "experience",
@@ -35,6 +45,7 @@ export const infoTopics: InfoTopic[] = [
     question: "Where has he worked?",
     answer:
       "Software Developer at Claro RD since 2023 (Sr. Software Engineer, 5+ yrs) — led a reusable React/Angular library (innovation award), cut user-reported issues 20% and page loads 40%. Earlier roles: BlackCode, OpenBootcamp, Boyants, Oracle ONE and a Bamapit internship. In Web3 he's been a Base LATAM Ambassador (Coinbase) and a Binance Angel.",
+    actions: [{ kind: "section", target: "experience" }, { kind: "cv" }],
   },
   {
     id: "web3",
@@ -42,6 +53,7 @@ export const infoTopics: InfoTopic[] = [
     question: "What's his Web3 work?",
     answer:
       "He builds and contributes in DeFi: the StandX SIP Guide, K-milla (Hack@LATAM 2026), and RepuLink — an on-chain reputation experiment on Solana. He's also been a Base LATAM Ambassador (Coinbase) and a Binance Angel, creating educational content to drive Web3 adoption across LATAM.",
+    actions: [{ kind: "section", target: "sidequests" }],
   },
   {
     id: "projects",
@@ -49,11 +61,13 @@ export const infoTopics: InfoTopic[] = [
     question: "What should I look at first?",
     answer:
       "Start with the Mission Log: RepuLink (escrow and on-chain reputation on Solana), the StandX Community Hub (onboarding with a docs-grounded AI guide) and the StandX SIP Guide (interactive yield simulator). Open any card for its achievements & impact.",
+    actions: [{ kind: "section", target: "projects" }],
   },
   {
     id: "contact",
     label: "How to reach him",
     question: "How do I get in touch?",
     answer: `He's open to senior software engineering & Web3 roles and collaborations. Email ${profile.email}, or head to the CONNECT sector to send a transmission and find his socials.`,
+    actions: [{ kind: "section", target: "contact" }, { kind: "email" }],
   },
 ];
